@@ -199,8 +199,15 @@ public class Player {
 	 * @return le nombre de 
 	 */
 	public int getBadRemaning(){
-		return badPawns.size();
-		
+		return badPawns.size();	
+	}
+	
+	public boolean allGoodPawnsSet(){
+		return getGoodRemaning() == Parameters.NB_GOOD;
+	}
+	
+	public boolean allBadPawnsSet(){
+		return getBadRemaning() == Parameters.NB_BAD;
 	}
 	
 	public String toString(){

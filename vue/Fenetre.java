@@ -12,6 +12,7 @@ import javax.swing.SwingConstants;
 import constantes.Direction;
 import constantes.Parameters;
 import modele.GameManager;
+import modele.Player;
 
 public class Fenetre extends JFrame{
 	private static final int WIDTH = 700;
@@ -124,26 +125,47 @@ public class Fenetre extends JFrame{
 		}
 		
 		private void init(){
-			int whiteGoodToBeSet = Parameters.NB_GOOD;
-			int whiteBadToBeSet = Parameters.NB_BAD;
-			
-			int blackGoodToBeSet = Parameters.NB_GOOD;
-			int blackBadToBeSet = Parameters.NB_BAD;
-			
-			placePawnAt(currentLine, currentColumn);
-		}
-		
-		private void placePawnAt(int line, int column){
 			if(gameManager.isWhiteToPlay()){
+				if(isAValidInitSquare(selectedSquare))
+					if(placePawnsForAPlayer(gameManager.getWhite(), true)) {
+						gameManager.switchTurn();
+						updateUpperLabel();
+					}
+			}
+			else{
 				if(isAValidInitSquare(selectedSquare)){
-					if(gameManager.getWhite().addGoodPawnAt(line, column, true)){
-						gameBoard.getSquareAt(line, column).setText("Gentil");
+					if(placePawnsForAPlayer(gameManager.getBlack(), false)){
+						gameManager.switchTurn();
+						upperLabel.setText("fin phase d'initialisation");
+						gameManager.setInitPhase(false);
 					}
 				}
-				else{
-					
+			}
+		}
+		
+		private boolean placeGoodPawnAt(int line, int column, Player player,boolean winUp){
+			return player.addGoodPawnAt(line, column, winUp);
+		}
+		
+		private boolean placeBadPawnAt(int line, int column, Player player){
+			 return player.addBadPawnAt(line, column);
+		}
+		
+		private boolean placePawnsForAPlayer(Player player, boolean winUp){
+			//placer tous les pions bons
+			if(!player.allGoodPawnsSet()){
+				if(placeGoodPawnAt(currentLine, currentColumn, player, true)){
+					gameBoard.getSquareAt(currentLine, currentColumn).setText("Gentil");
 				}
 			}
+			//placer les pions méchants
+			else if (!player.allBadPawnsSet()){
+				if(placeBadPawnAt(currentLine, currentColumn, player)){
+					gameBoard.getSquareAt(currentLine, currentColumn).setText("Mechant");
+				}
+				if(player.allBadPawnsSet()) return true;
+			}
+			return false;
 		}
 		
 		private boolean isAValidInitSquare(Square square){
