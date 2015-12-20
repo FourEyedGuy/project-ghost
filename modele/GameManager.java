@@ -5,20 +5,7 @@ package modele;
  * @author Edgar Liang, Li Huanghuang
  *
  */
-public class GameManager{
-	private Player white;
-	private Player black;
-	
-	/**
-	 * true si c'est au joueur blanc de jouer (premier joueur par défaut)
-	 */
-	private boolean whiteToPlay = true;
-	
-	/**
-	 * true si on est à la phase d'initialisation (placement initial des pions)
-	 */
-	private boolean initPhase = true;
-	
+public class GameManager extends AbstractModel{
 	/**
 	 * Construteur
 	 * 
@@ -26,70 +13,21 @@ public class GameManager{
 	 * @param nameB le nom du joueur qui joue les pions noirs
 	 */
 	public GameManager(String nameW, String nameB){
-		this.white = new Player(nameW);
-		this.black = new Player(nameB); 
+		super(nameW, nameB);
 	}
 	
 	/**
 	 * Constructeur avec les noms par défauts ("Blanc" pour white et "Noir" pour black)
 	 */
 	public GameManager(){
-		white = new Player("Blanc");
-		black = new Player("Noir");
+		super();
 	}
 	
-	/**
-	 * 
-	 * @return le joueur blanc
-	 */
-	public Player getWhite() {
-		return white;
-	}
-
-	/**
-	 * 
-	 * @return le joueur noir
-	 */
-	public Player getBlack() {
-		return black;
-	}
-	
-	/**
-	 * 
-	 * @return true si c'est au joueur blanc de joueur
-	 */
-	public boolean isWhiteToPlay(){
-		return whiteToPlay;
-	}
-	
-	
-	public boolean isInitPhase() {
-		return initPhase;
-	}
-
-	public void setInitPhase(boolean initPhase) {
-		this.initPhase = initPhase;
-	}
-
-	/**
-	 * A FAIRE
-	 * initialise le jeu en début de partie :
-	 * créer pour chaque joueur les 4 pions gentils et les 4 pions méchants
-	 */
-	public void init(){
-		
-	}
-
-
-	/**
-	 * l'ensemble des actions qui sont réalise pendant un tour de jeu
-	 */
-	public void doAction(){
-		
-	}
-	
-	public boolean move(int line, int column){
-		return false;
+	public void movePawnAt(int pawnLine, int pawnColumn, int destLine, int destColumn, boolean whiteToPlay){
+		if(whiteToPlay)
+			white.movePawnAtTo(pawnLine, pawnColumn, destLine, destColumn);
+		else
+			black.movePawnAtTo(pawnLine, pawnColumn, destLine, destColumn);
 	}
 	
 	/**
