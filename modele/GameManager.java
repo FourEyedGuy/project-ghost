@@ -58,9 +58,47 @@ public class GameManager extends AbstractModel{
 		whiteToPlay = !whiteToPlay; 
 	}
 	
+	
+	
 	public String toString(){
 		return white.toString() + black.toString() +
 				"C'est au tour de " + (whiteToPlay? "blanc":"noir") + " de jouer\n" + 
 				"Phase initialisation : " + initPhase;
+	}
+
+	public void addGoodPawnForWhitePlayerAt(int line, int column, boolean winUp) {
+		white.addGoodPawnAt(line, column, winUp);
+		notifyObserver();
+	}
+
+	public void addBadPawnForWhitePlayerAt(int line, int column) {
+		white.addBadPawnAt(line, column);
+		notifyObserver();
+	}
+
+	public void addGoodPawnForBlackPlayerAt(int line, int column, boolean winUp) {
+		black.addGoodPawnAt(line, column, winUp);
+		notifyObserver();
+	}
+
+	public void addBadPawnForBlackPlayerAt(int line, int column) {
+		black.addBadPawnAt(line, column);
+		notifyObserver();
+	}
+	
+	public boolean allWhiteGoodPawnsSet(){
+		return white.allGoodPawnsSet();	
+	}
+	
+	public boolean allWhiteBadPawnsSet(){
+		return white.allBadPawnsSet();
+	}
+	
+	public boolean allBlackGoodPawnsSet(){
+		return black.allGoodPawnsSet();	
+	}
+	
+	public boolean allBlackBadPawnsSet(){
+		return black.allBadPawnsSet();
 	}
 }

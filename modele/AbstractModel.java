@@ -68,7 +68,24 @@ public abstract class AbstractModel implements Observable {
 	}
 	
 	public abstract void movePawnAt(int pawnLine, int pawnColumn, int destLine, int destColumn, boolean whiteToPlay);
+	
+	public abstract void addGoodPawnForWhitePlayerAt(int line, int column, boolean winUp);
+	
+	public abstract void addBadPawnForWhitePlayerAt(int line, int column);
+	
+	public abstract void addGoodPawnForBlackPlayerAt(int line, int column, boolean winUp);
 
+	public abstract void addBadPawnForBlackPlayerAt(int line, int column);
+	
+	public abstract boolean allWhiteGoodPawnsSet();
+	
+	public abstract boolean allWhiteBadPawnsSet();
+	
+	public abstract boolean allBlackGoodPawnsSet();
+	
+	public abstract boolean allBlackBadPawnsSet();
+
+	
 	@Override
 	public void addObserver(Observer obs) {
 		observersList.add(obs);
@@ -78,11 +95,12 @@ public abstract class AbstractModel implements Observable {
 	public void removeObserver() {
 		observersList = new ArrayList<Observer>();
 	}
-
-	@Override
-	public void notifyObserver() {
-		for(Observer obs : observersList)
-			obs.update();
-	}
+	
+    @Override
+	public void notifyObserver(){
+    	for(Observer obs : observersList){
+    		obs.update(white, black, whiteToPlay, initPhase);
+    	}
+    }
 
 }

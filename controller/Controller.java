@@ -18,15 +18,33 @@ public class Controller extends AbstractController{
 			initControl();
 		else
 			playControl();
+		
+		pawnLine = -1;
+		pawnColumn = -1;
+		destLine = -1;
+		destColumn = -1;
 	}
 
 	@Override
 	public void initControl() {
 		if(gameMngr.isWhiteToPlay()){
-			if(placePawnsForAPlayer(gameMngr.getWhite(), true))
+			if(!gameMngr.allWhiteGoodPawnsSet()){
+				if(isAValidInitSquare())
+					gameMngr.addGoodPawnForWhitePlayerAt(pawnLine, pawnColumn, true);
+			}else if(!gameMngr.allWhiteBadPawnsSet()){
+				if(isAValidInitSquare())
+					gameMngr.addBadPawnForWhitePlayerAt(pawnLine, pawnColumn);
+			}else{
 				gameMngr.setWhiteToPlay(false);
+			}
 		}else{
-			if(placePawnsForAPlayer(gameMngr.getBlack(), false)){
+			if(!gameMngr.allBlackGoodPawnsSet()){
+				if(isAValidInitSquare())
+					gameMngr.addGoodPawnForBlackPlayerAt(pawnLine, pawnColumn, true);
+			}else if(!gameMngr.allBlackBadPawnsSet()){
+				if(isAValidInitSquare())
+					gameMngr.addBadPawnForBlackPlayerAt(pawnLine, pawnColumn);
+			}else{
 				gameMngr.setWhiteToPlay(true);
 				gameMngr.setInitPhase(false);
 			}

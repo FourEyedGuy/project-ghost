@@ -19,14 +19,17 @@ public abstract class AbstractController {
 
 	public void setLine(int line) {
 		this.pawnLine = line;
-		control();
 	}
 
 	public void setColumn(int column) {
 		this.pawnColumn = column;
-		control();
 	}
 	
+	public void setSquareAt(int line, int column){
+		setLine(line);
+		setColumn(column);
+		control();
+	}
 	
 	public void setDestLine(int destLine) {
 		this.destLine = destLine;

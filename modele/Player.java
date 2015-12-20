@@ -31,6 +31,15 @@ public class Player {
 		return this.name;
 	}
 	
+	
+	public ArrayList<Pawn> getAllPawns(){
+		ArrayList<Pawn> allPawnsList = new ArrayList<Pawn>();
+		allPawnsList.addAll(goodPawns);
+		allPawnsList.addAll(badPawns);
+		
+		return allPawnsList;
+	}
+	
 	/**
 	 * instancie les pions fantômes gentils du joueur
 	 * @param goodPawns un tableau de taille 4 de l'ensemble des Good
