@@ -83,6 +83,7 @@ public abstract class AbstractModel implements Observable {
 	public abstract boolean allBlackGoodPawnsSet();
 	
 	public abstract boolean allBlackBadPawnsSet();
+	
 
 	
 	@Override

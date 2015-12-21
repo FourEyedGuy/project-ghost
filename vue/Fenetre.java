@@ -1,19 +1,15 @@
 package vue;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import constantes.Direction;
 import constantes.Parameters;
 import controller.AbstractController;
-import modele.GameManager;
 import modele.Pawn;
 import modele.Player;
 import observer.Observer;
@@ -24,7 +20,8 @@ public class Fenetre extends JFrame implements Observer{
 	
 	private AbstractController controller;
 	private GameBoard gameBoard;
-	private JLabel upperLabel;
+	private JPanel upperPane;
+	private JLabel upperText;
 	private JLabel downLabel;
 	private JLabel errorMsg;
 	private boolean whiteToPlay = false;
@@ -46,10 +43,13 @@ public class Fenetre extends JFrame implements Observer{
 			gameBoard.getSquareAt(i).addActionListener(new SquareListener());
 		
 		Font font = new Font("Comic sans MS", Font.BOLD, 20);
-		upperLabel = new JLabel();
-		upperLabel.setFont(font);
-		upperLabel.setText("Placement initial : aux blancs de commencer");
-		upperLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		upperText = new JLabel();
+		upperText.setFont(font);
+		upperText.setText("Placement initial : aux blancs de commencer");
+		upperText.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		upperPane = new JPanel();
+		upperPane.add(upperText);
 		
 		downLabel = new JLabel();
 		downLabel.setFont(font);
@@ -60,7 +60,7 @@ public class Fenetre extends JFrame implements Observer{
 		errorMsg.setFont(font);
 		
 		
-		getContentPane().add(upperLabel, BorderLayout.NORTH);
+		getContentPane().add(upperPane, BorderLayout.NORTH);
 		getContentPane().add(gameBoard, BorderLayout.CENTER);
 		getContentPane().add(downLabel, BorderLayout.SOUTH);
 		
@@ -81,6 +81,14 @@ public class Fenetre extends JFrame implements Observer{
 			
 			//init
 			controller.setSquareAt(currentLine, currentColumn);
+		}
+	}
+	
+	class validateButtonListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
 		}
 	}
 
@@ -111,9 +119,16 @@ public class Fenetre extends JFrame implements Observer{
 	}
 	
 	private void updateUpperLabel(boolean whiteToPlay, boolean initPhase){
-		if(whiteToPlay != this.whiteToPlay){
-			this.whiteToPlay = whiteToPlay;
-			upperLabel.setText((initPhase? "(placement init.) ":"") + "C'est aux " + (whiteToPlay? "blanc":"noir") + "s de jouer");
+		upperText.setText((initPhase? "(placement init.) ":"") + "C'est aux " + (whiteToPlay? "blanc":"noir") + "s de jouer");
+	}
+	
+	private boolean justSwitchedTurn(boolean whiteToPlay){
+		return this.whiteToPlay != whiteToPlay;
+	}
+	
+	private void switchTurn(boolean whiteToPlay){
+		if (justSwitchedTurn(whiteToPlay)){
+			
 		}
 	}
 }

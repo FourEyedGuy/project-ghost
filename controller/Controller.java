@@ -20,6 +20,8 @@ public class Controller extends AbstractController{
 		else
 			playControl();
 		
+		switchTurnControl();
+		
 		pawnLine = -1;
 		pawnColumn = -1;
 		destLine = -1;
@@ -97,7 +99,7 @@ public class Controller extends AbstractController{
 	}
 	
 	public void switchTurnControl(){
-		
+		if(this.whiteToPlay != gameMngr.isWhiteToPlay())
 	}
 
 	@Override

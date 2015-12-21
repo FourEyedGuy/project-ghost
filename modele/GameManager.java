@@ -59,8 +59,6 @@ public class GameManager extends AbstractModel{
 		notifyObserver();
 	}
 	
-	
-	
 	public String toString(){
 		return white.toString() + black.toString() +
 				"C'est au tour de " + (whiteToPlay? "blanc":"noir") + " de jouer\n" + 
