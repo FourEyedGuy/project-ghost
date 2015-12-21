@@ -1,5 +1,6 @@
 package controller;
 
+import constantes.Direction;
 import constantes.Parameters;
 import modele.AbstractModel;
 
@@ -22,7 +23,7 @@ public class Controller extends AbstractController{
 		destLine = -1;
 		destColumn = -1;
 		
-		System.out.println(gameMngr.toString());
+		//System.out.println(gameMngr.toString());
 	}
 
 	@Override
@@ -72,7 +73,18 @@ public class Controller extends AbstractController{
 
 	@Override
 	public void playControl() {
-		// TODO Auto-generated method stub
-		
+		if(isAValidMove()){
+			gameMngr.movePawnAt(pawnLine, pawnColumn, destLine, destColumn, whiteToPlay);
+		}
+	}
+	
+	public boolean isAValidMove(){
+		if(destLine >=0 && destColumn >= 0){
+			for(Direction dir:Direction.values()){
+				if(pawnLine + dir.getLine() == destLine && pawnColumn + dir.getColumn() == destColumn)
+					return true;
+			}
+		}
+		return false;
 	}
 }

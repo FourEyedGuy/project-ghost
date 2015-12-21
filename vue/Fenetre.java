@@ -55,7 +55,8 @@ public class Fenetre extends JFrame implements Observer{
 		
 		upperPane = new JPanel();
 		upperPane.add(upperText);
-		
+		upperPane.add(validate);
+		validate.setEnabled(false);
 		
 		downLabel = new JLabel();
 		downLabel.setFont(font);
@@ -69,7 +70,7 @@ public class Fenetre extends JFrame implements Observer{
 		getContentPane().add(downLabel, BorderLayout.SOUTH);
 		
 		setVisible(true);
-		
+		validate.setVisible(false);
 	}
 	
 	class SquareListener implements ActionListener{
@@ -92,19 +93,35 @@ public class Fenetre extends JFrame implements Observer{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			whiteToPlay = !whiteToPlay;
 			setEnabledBoard(true);
-			upperPane.remove(validate);
-			upperPane.validate();
+			onStandBy = false;
 			controller.standByUpdate();
+			validate.setEnabled(false);
+			validate.setVisible(false);
+			
+			System.out.println("================");
+			System.out.println("apres click ok :");
+			System.out.println("this.whiteToPlay : " + whiteToPlay + "\n"
+					+ "gameMngr whiteToPlay : " + whiteToPlay + "\n"
+					+ "onStandBy : " + onStandBy);
 		}
 	}
 
 	@Override
 	public void update(Player white, Player black, boolean whiteToPlay, boolean initPhase) {
-		if(justSwitchedTurn(whiteToPlay) && !onStandBy) {
-			onStandBy(white, black);
-			onStandBy = true;
+		System.out.println("================");
+		System.out.println("Avant update :");
+		System.out.println("this.whiteToPlay : " + this.whiteToPlay + "\n"
+				+ "gameMngr whiteToPlay : " + whiteToPlay + "\n"
+				+ "onStandBy : " + onStandBy);
+		
+		if(justSwitchedTurn(whiteToPlay)) onStandBy = true;
+		
+		if(onStandBy) {
+			onStandBy();
+			this.whiteToPlay = whiteToPlay;
+			updatePlayer(white, false, "Blanc");
+			updatePlayer(black, false, "Noir");
 		}else{
 			updateUpperLabel(whiteToPlay, initPhase);
 			if(whiteToPlay){
@@ -116,7 +133,11 @@ public class Fenetre extends JFrame implements Observer{
 				updatePlayer(white, false, "Blanc");
 			}
 		}
-		
+		System.out.println("================");
+		System.out.println("Apres update :");
+		System.out.println("this.whiteToPlay : " + this.whiteToPlay + "\n"
+				+ "gameMngr whiteToPlay : " + whiteToPlay + "\n"
+				+ "onStandBy : " + onStandBy);
 	}
 	
 	private void updatePlayer(Player player, boolean reveal, String coverText){
@@ -138,12 +159,17 @@ public class Fenetre extends JFrame implements Observer{
 		return this.whiteToPlay != whiteToPlay;
 	}
 	
-	private void onStandBy(Player white, Player black){
+	private void onStandBy(){
 		setEnabledBoard(false);
 		upperText.setText("Passez au joueur suivant");
-		upperPane.add(validate);
-		updatePlayer(white, false, "Blanc");
-		updatePlayer(black, false, "Noir");
+		validate.setVisible(true);
+		validate.setEnabled(true);
+		
+		System.out.println("================");
+		System.out.println("avant click ok :");
+		System.out.println("this.whiteToPlay : " + whiteToPlay + "\n"
+				+ "gameMngr whiteToPlay : " + whiteToPlay + "\n"
+				+ "onStandBy : " + onStandBy);
 	}
 	
 	private void setEnabledBoard(boolean on){

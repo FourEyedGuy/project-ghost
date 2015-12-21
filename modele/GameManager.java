@@ -28,6 +28,8 @@ public class GameManager extends AbstractModel{
 			white.movePawnAtTo(pawnLine, pawnColumn, destLine, destColumn);
 		else
 			black.movePawnAtTo(pawnLine, pawnColumn, destLine, destColumn);
+		
+		notifyObserver();
 	}
 	
 	/**
