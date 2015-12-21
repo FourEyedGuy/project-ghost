@@ -54,9 +54,7 @@ public abstract class AbstractModel implements Observable {
 		return whiteToPlay;
 	}
 	
-	public void setWhiteToPlay(boolean whiteToPlay){
-		this.whiteToPlay = whiteToPlay;
-	}
+	public abstract void switchTurn();
 	
 	
 	public boolean isInitPhase() {

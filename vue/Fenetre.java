@@ -27,7 +27,7 @@ public class Fenetre extends JFrame implements Observer{
 	private JLabel upperLabel;
 	private JLabel downLabel;
 	private JLabel errorMsg;
-	
+	private boolean whiteToPlay = false;
 	
 	private boolean squareSelected = false;
 	private Square currentSelectedSquare = new Square("");
@@ -111,6 +111,9 @@ public class Fenetre extends JFrame implements Observer{
 	}
 	
 	private void updateUpperLabel(boolean whiteToPlay, boolean initPhase){
-		upperLabel.setText((initPhase? "(placement init.) ":"") + "C'est aux " + (whiteToPlay? "blanc":"noir") + "s de jouer");
+		if(whiteToPlay != this.whiteToPlay){
+			this.whiteToPlay = whiteToPlay;
+			upperLabel.setText((initPhase? "(placement init.) ":"") + "C'est aux " + (whiteToPlay? "blanc":"noir") + "s de jouer");
+		}
 	}
 }

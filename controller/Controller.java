@@ -37,9 +37,10 @@ public class Controller extends AbstractController{
 			}else if(!gameMngr.allWhiteBadPawnsSet()){
 				if(isAValidInitSquare())
 					gameMngr.addBadPawnForWhitePlayerAt(pawnLine, pawnColumn);
-			}else{
-				gameMngr.setWhiteToPlay(false);
 			}
+			
+			if(gameMngr.allWhiteGoodPawnsSet() && gameMngr.allWhiteBadPawnsSet())
+				gameMngr.switchTurn();
 		}else{
 			if(!gameMngr.allBlackGoodPawnsSet()){
 				if(isAValidInitSquare())
@@ -47,8 +48,10 @@ public class Controller extends AbstractController{
 			}else if(!gameMngr.allBlackBadPawnsSet()){
 				if(isAValidInitSquare())
 					gameMngr.addBadPawnForBlackPlayerAt(pawnLine, pawnColumn);
-			}else{
-				gameMngr.setWhiteToPlay(true);
+			}
+			
+			if(gameMngr.allBlackGoodPawnsSet() && gameMngr.allBlackBadPawnsSet()){
+				gameMngr.switchTurn();
 				gameMngr.setInitPhase(false);
 			}
 		}
@@ -91,6 +94,10 @@ public class Controller extends AbstractController{
 			}
 		}
 		return false;
+	}
+	
+	public void switchTurnControl(){
+		
 	}
 
 	@Override
