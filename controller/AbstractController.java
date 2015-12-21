@@ -1,0 +1,53 @@
+package controller;
+
+import constantes.Direction;
+import modele.AbstractModel;
+
+public abstract class AbstractController {
+	protected AbstractModel gameMngr;
+	protected boolean isInitPhase;
+	protected boolean whiteToPlay;
+	protected int pawnLine = -1;
+	protected int pawnColumn = -1;
+	protected int destLine = -1;
+	protected int destColumn = -1;
+	
+	
+	public AbstractController(AbstractModel gameMngr){
+		this.gameMngr = gameMngr;
+		isInitPhase = gameMngr.isInitPhase();
+		whiteToPlay = gameMngr.isWhiteToPlay();
+	}
+
+	public void setLine(int line) {
+		this.pawnLine = line;
+	}
+
+	public void setColumn(int column) {
+		this.pawnColumn = column;
+	}
+	
+	public void setSquareAt(int line, int column){
+		setLine(line);
+		setColumn(column);
+		control();
+	}
+	
+	public void setDestLine(int destLine) {
+		this.destLine = destLine;
+	}
+
+	public void setDestColumn(int destColumn) {
+		this.destColumn = destColumn;
+	}
+	
+	public void setDestSquateAt(int destLine, int destColumn){
+		setDestLine(destLine);
+		setDestColumn(destColumn);
+		control();
+	}
+
+	public abstract void control();
+	public abstract void initControl();
+	public abstract void playControl();
+}

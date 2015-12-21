@@ -1,4 +1,5 @@
 package modele;
+import java.awt.Panel;
 import java.util.ArrayList;
 
 import constantes.*;
@@ -28,6 +29,15 @@ public class Player {
 	 */
 	public String getName(){
 		return this.name;
+	}
+	
+	
+	public ArrayList<Pawn> getAllPawns(){
+		ArrayList<Pawn> allPawnsList = new ArrayList<Pawn>();
+		allPawnsList.addAll(goodPawns);
+		allPawnsList.addAll(badPawns);
+		
+		return allPawnsList;
 	}
 	
 	/**
@@ -91,20 +101,15 @@ public class Player {
 	}
 	
 	/**
-	 * A FAIRE
 	 * Déplace un pion qui est placé au coordonée indiquée
 	 * @param dir la direction vers lequel déplacer le pion
-	 * @param line la ligne sur laquelle est sité le pion
-	 * @param column la colonne sur lequel est situé le pion
+	 * @param destLine la ligne sur laquelle est situé la case de destination
+	 * @param column la colonne sur laquelle est situé la case de destination
 	 * 
 	 * @return true s'il y a eu déplacement de pion
 	 */
-	public boolean movePawn(Direction dir, int line, int column){
-		if (!thereIsPawnAt(line, column)) return false;
-		
-		//for()
-		
-		return true;
+	public void movePawnAtTo(int pawnLine, int pawnColumn, int destLine, int destColumn){
+		getPawnAt(pawnLine, pawnColumn).move(destLine, destColumn);
 	}
 	
 	/**
@@ -125,6 +130,26 @@ public class Player {
 		}
 		
 		return false;
+	}
+	
+	/**
+	 * Renvoie le Pion situé aux coordonnees indiquees
+	 * @param line
+	 * @param column
+	 * @return le pion qui est situe aux coordonnees indiquees
+	 */
+	public Pawn getPawnAt(int line, int column){
+		for(int i = 0; i < getGoodRemaning(); i++){
+			if(goodPawns.get(i).getLine() == line && badPawns.get(i).getColumn() == column)
+				return goodPawns.get(i);
+		}
+		
+		for (int i = 0; i < badPawns.size(); i++){
+			if (badPawns.get(i).getLine() == line && badPawns.get(i).getColumn() == column)
+				return badPawns.get(i);
+		}
+		
+		return null;
 	}
 	
 	/**
