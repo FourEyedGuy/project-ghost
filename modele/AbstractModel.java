@@ -65,6 +65,7 @@ public abstract class AbstractModel implements Observable {
 
 	public void setInitPhase(boolean initPhase) {
 		this.initPhase = initPhase;
+		notifyObserver();
 	}
 	
 	public abstract void movePawnAt(int pawnLine, int pawnColumn, int destLine, int destColumn, boolean whiteToPlay);

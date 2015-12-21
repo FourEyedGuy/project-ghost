@@ -28,7 +28,7 @@ public class Fenetre extends JFrame implements Observer{
 	private JLabel downLabel;
 	private JLabel errorMsg;
 	
-	private boolean update = false;
+	
 	private boolean squareSelected = false;
 	private Square currentSelectedSquare = new Square("");
 	
@@ -48,12 +48,12 @@ public class Fenetre extends JFrame implements Observer{
 		Font font = new Font("Comic sans MS", Font.BOLD, 20);
 		upperLabel = new JLabel();
 		upperLabel.setFont(font);
-		upperLabel.setText("phase init");
+		upperLabel.setText("Placement initial : aux blancs de commencer");
 		upperLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		downLabel = new JLabel();
 		downLabel.setFont(font);
-		downLabel.setText("pièce adverse prise : 2 gentils, 3 méchants");
+		//downLabel.setText("pièce adverse prise : 2 gentils, 3 méchants");
 		setLayout(new BorderLayout());
 		
 		errorMsg = new JLabel("");
@@ -86,13 +86,17 @@ public class Fenetre extends JFrame implements Observer{
 
 	@Override
 	public void update(Player white, Player black, boolean whiteToPlay, boolean initPhase) {
+		updateUpperLabel(whiteToPlay, initPhase);
+		
 		if(whiteToPlay){
 			updatePlayer(white, true, "");
 			updatePlayer(black, false, "Noir");
+			
 		}else{
 			updatePlayer(black, true, "");
 			updatePlayer(white, false, "Blanc");
 		}
+		
 	}
 	
 	private void updatePlayer(Player player, boolean reveal, String coverText){
@@ -104,5 +108,9 @@ public class Fenetre extends JFrame implements Observer{
 				gameBoard.setSquareAt(coverText, pawn.getLine(), pawn.getColumn());
 			}
 		}
+	}
+	
+	private void updateUpperLabel(boolean whiteToPlay, boolean initPhase){
+		upperLabel.setText((initPhase? "(placement init.) ":"") + "C'est aux " + (whiteToPlay? "blanc":"noir") + "s de jouer");
 	}
 }

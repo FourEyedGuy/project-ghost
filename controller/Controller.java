@@ -14,8 +14,9 @@ public class Controller extends AbstractController{
 
 	@Override
 	public void control() {
-		if(gameMngr.isInitPhase())
+		if(gameMngr.isInitPhase()){
 			initControl();
+		}
 		else
 			playControl();
 		
@@ -23,6 +24,8 @@ public class Controller extends AbstractController{
 		pawnColumn = -1;
 		destLine = -1;
 		destColumn = -1;
+		
+		System.out.println(gameMngr.toString());
 	}
 
 	@Override

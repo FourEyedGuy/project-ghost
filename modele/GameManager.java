@@ -55,7 +55,8 @@ public class GameManager extends AbstractModel{
 	}
 	
 	public void switchTurn(){
-		whiteToPlay = !whiteToPlay; 
+		whiteToPlay = !whiteToPlay;
+		notifyObserver();
 	}
 	
 	
