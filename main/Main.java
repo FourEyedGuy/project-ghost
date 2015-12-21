@@ -2,8 +2,6 @@ package main;
 
 import vue.Fenetre;
 
-import java.util.Scanner;
-
 import controller.AbstractController;
 import controller.Controller;
 import modele.*;

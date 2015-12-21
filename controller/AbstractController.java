@@ -46,6 +46,10 @@ public abstract class AbstractController {
 		setDestColumn(destColumn);
 		control();
 	}
+	
+	public void standByUpdate(){
+		gameMngr.notifyObserver();
+	}
 
 	public abstract void control();
 	public abstract void initControl();

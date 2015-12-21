@@ -2,9 +2,6 @@ package controller;
 
 import constantes.Parameters;
 import modele.AbstractModel;
-import modele.GameManager;
-import modele.Player;
-import vue.Square;
 
 public class Controller extends AbstractController{
 
@@ -19,8 +16,6 @@ public class Controller extends AbstractController{
 		}
 		else
 			playControl();
-		
-		switchTurnControl();
 		
 		pawnLine = -1;
 		pawnColumn = -1;
@@ -59,29 +54,6 @@ public class Controller extends AbstractController{
 		}
 	}
 	
-	/**
-	 * place tous les pions pour un joueur donne
-	 * @param player le joueur pour qui on doit placer les pions
-	 * @param winUp si le joueur doit amener ses pions gentils vers les deux cases de sortie du haut
-	 * @return true si on a fini de placer tous les pions pour le joueurs
-	 */
-	private boolean placePawnsForAPlayer(Player player, boolean winUp){
-		//placer tous les pions bons
-		if(!player.allGoodPawnsSet()){
-			if(isAValidInitSquare()){
-				player.addGoodPawnAt(pawnLine, pawnColumn, winUp);
-			}
-		}
-		//placer les pions méchants
-		else if (!player.allBadPawnsSet()){
-			if(isAValidInitSquare()){
-				player.addBadPawnAt(pawnLine, pawnColumn);
-				return true;
-			}
-		}
-		return false;
-	}
-	
 	private boolean isAValidInitSquare(){
 		if(gameMngr.isWhiteToPlay()){
 			if(pawnLine >= Parameters.BOARD_HEIGHT-2 && pawnLine < Parameters.BOARD_HEIGHT){
@@ -96,10 +68,6 @@ public class Controller extends AbstractController{
 			}
 		}
 		return false;
-	}
-	
-	public void switchTurnControl(){
-		if(this.whiteToPlay != gameMngr.isWhiteToPlay());
 	}
 
 	@Override
