@@ -153,12 +153,13 @@ public class Player {
 	}
 	
 	/**
-	 * A FAIRE
 	 * Dire si un pion gentil vient de sortir
 	 * @return true si un pion gentil vient de sortir
 	 */
 	public boolean aGoodHasExited(){
-		//pas prioitaire : je ne suis même pas sûr qu'on aurait besoin de cette méthode
+		for(Good pawn : goodPawns)
+			if(pawn.exit()) return true;
+		
 		return false;
 	}
 	
@@ -167,10 +168,7 @@ public class Player {
 	 * @return true si tous les pions gentils ont été capturés
 	 */
 	public boolean allGoodBeenCaptured(){
-		if (goodPawns.size() == 0)
-			return true;
-		else
-			return false;
+		return goodPawns.size() <= 0;
 	}
 
 	/**
@@ -178,10 +176,7 @@ public class Player {
 	 * @return true si tous les pions méchants ont été capturés
 	 */
 	public boolean allBadBeenCaptured(){
-		if (badPawns.size()==0)
-			return true;
-		else
-			return false;
+		return badPawns.size()<=0;
 	}
 	
 	/**

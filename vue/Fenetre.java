@@ -121,6 +121,7 @@ public class Fenetre extends JFrame implements Observer{
 	public void update(Player white, Player black, boolean whiteToPlay, boolean initPhase) {
 		clearBoard();
 		if(justSwitchedTurn(whiteToPlay)) onStandBy = true;
+		if(!initPhase) updateDownLabel(white, black, whiteToPlay);
 		
 		if(onStandBy) {
 			onStandBy();
@@ -155,6 +156,11 @@ public class Fenetre extends JFrame implements Observer{
 	
 	private void updateUpperLabel(boolean whiteToPlay, boolean initPhase){
 		upperText.setText((initPhase? "(placement init.) ":"") + "C'est aux " + (whiteToPlay? "blanc":"noir") + "s de jouer");
+	}
+	
+	private void updateDownLabel(Player white, Player black, boolean whiteToPlay){
+			downLabel.setText("Pions adverses pris : gentils " + (Parameters.NB_GOOD - (whiteToPlay? black:white).getGoodRemaning()) +
+			", mechant " + (Parameters.NB_BAD - (whiteToPlay? black:white).getBadRemaning()));
 	}
 	
 	private boolean justSwitchedTurn(boolean whiteToPlay){

@@ -90,6 +90,38 @@ public abstract class AbstractModel implements Observable {
 	
 	public abstract void removeOpponentPawnAt(int line, int column);
 	
+	public abstract boolean whitePlayerWon();
+	
+	public abstract boolean blackPlayerWon();
+	
+	/**
+	 * Dire si le jeu est fini, si les conditions de fin de jeu est realise :
+	 * - Un joueur a capture tout les bon fantomes de son adversaire
+	 * - Un joueur a capture tout les mauvais fantôme de son adversaire
+	 * - Un joueur a reussi à faire sortir tout ses bon fantomes
+	 * 
+	 * @return true si le jeu est terminé
+	 */
+	public boolean gameEnded(){
+		return whitePlayerWon() || blackPlayerWon();
+	}
+	
+	/**
+	 * renvoi quel est le joueur gagnant :
+	 * - Un joueur a capturé tout les bon fantômes de son adversaire (il gagne)
+	 * - Un joueur a capturé tout les mauvais fantôme de son adversaire (il perd)
+	 * - Un joueur a réussi à faire sortir tout ses bon fantômes (il gagne)
+	 * 
+	 * @return le nom du joueur gagnant
+	 */
+	public String winner(){
+		if(whitePlayerWon()) return getWhite().getName();
+		
+		if(blackPlayerWon()) return getBlack().getName();
+		
+		return null;
+	}
+	
 	@Override
 	public void addObserver(Observer obs) {
 		observersList.add(obs);

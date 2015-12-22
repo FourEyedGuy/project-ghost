@@ -32,30 +32,6 @@ public class GameManager extends AbstractModel{
 		notifyObserver();
 	}
 	
-	/**
-	 * Dire si le jeu est fini, si les conditions de fin de jeu est realise :
-	 * - Un joueur a capture tout les bon fantomes de son adversaire
-	 * - Un joueur a capture tout les mauvais fantôme de son adversaire
-	 * - Un joueur a reussi à faire sortir tout ses bon fantomes
-	 * 
-	 * @return true si le jeu est terminé
-	 */
-	public boolean gameEnded(){
-		return false;
-	}
-	
-	/**
-	 * renvoi quel est le joueur gagnant :
-	 * - Un joueur a capturé tout les bon fantômes de son adversaire (il gagne)
-	 * - Un joueur a capturé tout les mauvais fantôme de son adversaire (il perd)
-	 * - Un joueur a réussi à faire sortir tout ses bon fantômes (il gagne)
-	 * 
-	 * @return le nom du joueur gagnant
-	 */
-	public String winner(){
-		return null;
-	}
-	
 	public void switchTurn(){
 		whiteToPlay = !whiteToPlay;
 		notifyObserver();
@@ -127,5 +103,19 @@ public class GameManager extends AbstractModel{
 			white.removePawnAt(line, column);
 		
 		notifyObserver();
+	}
+
+	@Override
+	public boolean whitePlayerWon() {
+		return getBlack().allGoodBeenCaptured() || 
+				getWhite().allBadBeenCaptured() || 
+				getWhite().aGoodHasExited();
+	}
+
+	@Override
+	public boolean blackPlayerWon() {
+		return getWhite().allGoodBeenCaptured() ||
+				getBlack().allBadBeenCaptured() ||
+				getBlack().aGoodHasExited();
 	}
 }

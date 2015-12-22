@@ -18,9 +18,9 @@ public class Controller extends AbstractController{
 		else
 			playControl();
 		
-		System.out.println(gameMngr.toString());
-		System.out.println("(pawnLine, pawnColumn, destLine, destColumn) - apres control :\n(" + pawnLine + "," + pawnColumn + "," + destLine + "," + destColumn +")");
-		System.out.println();
+		//System.out.println(gameMngr.toString());
+		//System.out.println("(pawnLine, pawnColumn, destLine, destColumn) - apres control :\n(" + pawnLine + "," + pawnColumn + "," + destLine + "," + destColumn +")");
+		//System.out.println();
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class Controller extends AbstractController{
 			}
 		}
 		
-		System.out.println("(pawnLine, pawnColumn, destLine, destColumn) - init control :\n(" + pawnLine + "," + pawnColumn + "," + destLine + "," + destColumn +")");
+		//System.out.println("(pawnLine, pawnColumn, destLine, destColumn) - init control :\n(" + pawnLine + "," + pawnColumn + "," + destLine + "," + destColumn +")");
 		
 		pawnLine = -1;
 		pawnColumn = -1;
@@ -81,7 +81,7 @@ public class Controller extends AbstractController{
 			gameMngr.switchTurn();
 		}
 		
-		System.out.println("(pawnLine, pawnColumn, destLine, destColumn) - play control :\n(" + pawnLine + "," + pawnColumn + "," + destLine + "," + destColumn +")");
+		//System.out.println("(pawnLine, pawnColumn, destLine, destColumn) - play control :\n(" + pawnLine + "," + pawnColumn + "," + destLine + "," + destColumn +")");
 		
 		if(destLine >= 0 && destColumn >= 0){
 			pawnLine = -1;
