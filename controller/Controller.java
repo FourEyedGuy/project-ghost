@@ -18,12 +18,9 @@ public class Controller extends AbstractController{
 		else
 			playControl();
 		
-		pawnLine = -1;
-		pawnColumn = -1;
-		destLine = -1;
-		destColumn = -1;
-		
-		//System.out.println(gameMngr.toString());
+		System.out.println(gameMngr.toString());
+		System.out.println("(pawnLine, pawnColumn, destLine, destColumn) - apres control :\n(" + pawnLine + "," + pawnColumn + "," + destLine + "," + destColumn +")");
+		System.out.println();
 	}
 
 	@Override
@@ -53,6 +50,11 @@ public class Controller extends AbstractController{
 				gameMngr.setInitPhase(false);
 			}
 		}
+		
+		System.out.println("(pawnLine, pawnColumn, destLine, destColumn) - init control :\n(" + pawnLine + "," + pawnColumn + "," + destLine + "," + destColumn +")");
+		
+		pawnLine = -1;
+		pawnColumn = -1;
 	}
 	
 	private boolean isAValidInitSquare(){
@@ -74,17 +76,28 @@ public class Controller extends AbstractController{
 	@Override
 	public void playControl() {
 		if(isAValidMove()){
-			gameMngr.movePawnAt(pawnLine, pawnColumn, destLine, destColumn, whiteToPlay);
+			gameMngr.movePawnAt(pawnLine, pawnColumn, destLine, destColumn);
+			if(gameMngr.thereIsOpponentPawnAt(destLine, destColumn)) gameMngr.removeOpponentPawnAt(destLine, destColumn);
+			gameMngr.switchTurn();
 		}
+		
+		System.out.println("(pawnLine, pawnColumn, destLine, destColumn) - play control :\n(" + pawnLine + "," + pawnColumn + "," + destLine + "," + destColumn +")");
+		
+		if(destLine >= 0 && destColumn >= 0){
+			pawnLine = -1;
+			pawnColumn = -1;
+			destLine = -1;
+			destColumn = -1;
+		}
+		
+		
 	}
 	
-	public boolean isAValidMove(){
-		if(destLine >=0 && destColumn >= 0){
+	private boolean isAValidMove(){
 			for(Direction dir:Direction.values()){
-				if(pawnLine + dir.getLine() == destLine && pawnColumn + dir.getColumn() == destColumn)
+				if(pawnLine + dir.getLine() == destLine && pawnColumn + dir.getColumn() == destColumn && !gameMngr.thereIsPawnAt(destLine, destColumn))
 					return true;
 			}
-		}
 		return false;
 	}
 }

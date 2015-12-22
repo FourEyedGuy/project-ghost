@@ -1,5 +1,6 @@
 package vue;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,6 +29,7 @@ public class Fenetre extends JFrame implements Observer{
 	private JLabel downLabel;
 	private boolean whiteToPlay = true;
 	private boolean onStandBy = false;
+	private boolean initPhase = true;
 	
 	private boolean squareSelected = false;
 	private Square currentSelectedSquare = new Square("");
@@ -84,8 +86,22 @@ public class Fenetre extends JFrame implements Observer{
 			currentLine = selectedSquare.getLine();
 			currentColumn = selectedSquare.getColumn();
 			
-			//init
-			controller.setSquareAt(currentLine, currentColumn);
+			if(initPhase){
+				controller.setSquareAt(currentLine, currentColumn);
+			}else{
+				if(!squareSelected && controller.thereIsPawnAt(currentLine, currentColumn)){
+					controller.setSquareAt(currentLine, currentColumn);
+					squareSelected = true;
+					currentSelectedSquare = gameBoard.getSquareAt(currentLine, currentColumn);
+					currentSelectedSquare.setBackground(Color.green);
+				}
+				else{
+					controller.setDestSquateAt(currentLine, currentColumn);
+					squareSelected = false;
+					currentSelectedSquare.setBackground(Color.white);
+					currentSelectedSquare = new Square("");
+				}
+			}
 		}
 	}
 	
@@ -98,23 +114,12 @@ public class Fenetre extends JFrame implements Observer{
 			controller.standByUpdate();
 			validate.setEnabled(false);
 			validate.setVisible(false);
-			
-			System.out.println("================");
-			System.out.println("apres click ok :");
-			System.out.println("this.whiteToPlay : " + whiteToPlay + "\n"
-					+ "gameMngr whiteToPlay : " + whiteToPlay + "\n"
-					+ "onStandBy : " + onStandBy);
 		}
 	}
 
 	@Override
 	public void update(Player white, Player black, boolean whiteToPlay, boolean initPhase) {
-		System.out.println("================");
-		System.out.println("Avant update :");
-		System.out.println("this.whiteToPlay : " + this.whiteToPlay + "\n"
-				+ "gameMngr whiteToPlay : " + whiteToPlay + "\n"
-				+ "onStandBy : " + onStandBy);
-		
+		clearBoard();
 		if(justSwitchedTurn(whiteToPlay)) onStandBy = true;
 		
 		if(onStandBy) {
@@ -133,11 +138,8 @@ public class Fenetre extends JFrame implements Observer{
 				updatePlayer(white, false, "Blanc");
 			}
 		}
-		System.out.println("================");
-		System.out.println("Apres update :");
-		System.out.println("this.whiteToPlay : " + this.whiteToPlay + "\n"
-				+ "gameMngr whiteToPlay : " + whiteToPlay + "\n"
-				+ "onStandBy : " + onStandBy);
+		
+		if(this.initPhase != initPhase) this.initPhase = initPhase;
 	}
 	
 	private void updatePlayer(Player player, boolean reveal, String coverText){
@@ -164,16 +166,15 @@ public class Fenetre extends JFrame implements Observer{
 		upperText.setText("Passez au joueur suivant");
 		validate.setVisible(true);
 		validate.setEnabled(true);
-		
-		System.out.println("================");
-		System.out.println("avant click ok :");
-		System.out.println("this.whiteToPlay : " + whiteToPlay + "\n"
-				+ "gameMngr whiteToPlay : " + whiteToPlay + "\n"
-				+ "onStandBy : " + onStandBy);
 	}
 	
 	private void setEnabledBoard(boolean on){
 		for(int i=0; i< Parameters.BOARD_HEIGHT * Parameters.BOARD_WIDTH; i++)
 			gameBoard.getSquareAt(i).setEnabled(on);
+	}
+	
+	private void clearBoard(){
+		for(int i=0; i< Parameters.BOARD_HEIGHT * Parameters.BOARD_WIDTH; i++)
+			gameBoard.getSquareAt(i).setText("");;
 	}
 }

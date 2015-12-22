@@ -23,7 +23,7 @@ public class GameManager extends AbstractModel{
 		super();
 	}
 	
-	public void movePawnAt(int pawnLine, int pawnColumn, int destLine, int destColumn, boolean whiteToPlay){
+	public void movePawnAt(int pawnLine, int pawnColumn, int destLine, int destColumn){
 		if(whiteToPlay)
 			white.movePawnAtTo(pawnLine, pawnColumn, destLine, destColumn);
 		else
@@ -101,5 +101,31 @@ public class GameManager extends AbstractModel{
 	
 	public boolean allBlackBadPawnsSet(){
 		return black.allBadPawnsSet();
+	}
+
+	@Override
+	public boolean thereIsPawnAt(int line, int column) {
+		if(whiteToPlay)
+			return white.thereIsPawnAt(line, column);
+		else
+			return black.thereIsPawnAt(line, column);
+	}
+
+	@Override
+	public boolean thereIsOpponentPawnAt(int line, int column) {
+		if(whiteToPlay)
+			return black.thereIsPawnAt(line, column);
+		else
+			return white.thereIsPawnAt(line, column);
+	}
+
+	@Override
+	public void removeOpponentPawnAt(int line, int column) {
+		if(whiteToPlay)
+			black.removePawnAt(line, column);
+		else
+			white.removePawnAt(line, column);
+		
+		notifyObserver();
 	}
 }

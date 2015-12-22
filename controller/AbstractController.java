@@ -7,6 +7,7 @@ public abstract class AbstractController {
 	protected AbstractModel gameMngr;
 	protected boolean isInitPhase;
 	protected boolean whiteToPlay;
+	protected boolean squareSelected = false;
 	protected int pawnLine = -1;
 	protected int pawnColumn = -1;
 	protected int destLine = -1;
@@ -49,6 +50,10 @@ public abstract class AbstractController {
 	
 	public void standByUpdate(){
 		gameMngr.notifyObserver();
+	}
+	
+	public boolean thereIsPawnAt(int line, int column){
+		return gameMngr.thereIsPawnAt(line, column);
 	}
 
 	public abstract void control();

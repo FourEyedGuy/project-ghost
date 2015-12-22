@@ -140,7 +140,7 @@ public class Player {
 	 */
 	public Pawn getPawnAt(int line, int column){
 		for(int i = 0; i < getGoodRemaning(); i++){
-			if(goodPawns.get(i).getLine() == line && badPawns.get(i).getColumn() == column)
+			if(goodPawns.get(i).getLine() == line && goodPawns.get(i).getColumn() == column)
 				return goodPawns.get(i);
 		}
 		
@@ -185,7 +185,6 @@ public class Player {
 	}
 	
 	/**
-	 * A FAIRE
 	 * retire un pion situé aux coordonnées indiqués
 	 * @param ligne la ligne sur laquelle est située le pion à retirer
 	 * @param colone la colonne sur lequel est situé le pion à retirer
@@ -204,10 +203,8 @@ public class Player {
 			if(ligne == badPawns.get(i).getLine() && colone == badPawns.get(i).getColumn()){
 				badPawns.remove(i);
 				return true;
-			}
-				
+			}	
 		}
-		
 		return false;
 	}
 	
