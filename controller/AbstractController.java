@@ -59,4 +59,5 @@ public abstract class AbstractController {
 	public abstract void control();
 	public abstract void initControl();
 	public abstract void playControl();
+	public abstract boolean playerWin();
 }

@@ -1,8 +1,5 @@
 package observer;
 
-import java.util.ArrayList;
-
-import modele.Pawn;
 import modele.Player;
 
 public interface Observer {

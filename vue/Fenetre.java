@@ -43,7 +43,7 @@ public class Fenetre extends JFrame implements Observer{
 		
 		this.controller = controller; 
 		gameBoard = new GameBoard();
-		//gameBoard.init();
+		gameBoard.setExitsColor();
 		for(int i=0; i<(Parameters.BOARD_HEIGHT * Parameters.BOARD_WIDTH);i++)
 			gameBoard.getSquareAt(i).addActionListener(new SquareListener());
 		
@@ -62,11 +62,8 @@ public class Fenetre extends JFrame implements Observer{
 		
 		downLabel = new JLabel();
 		downLabel.setFont(font);
-		//downLabel.setText("pièce adverse prise : 2 gentils, 3 méchants");
+		
 		setLayout(new BorderLayout());
-		
-		
-		
 		getContentPane().add(upperPane, BorderLayout.NORTH);
 		getContentPane().add(gameBoard, BorderLayout.CENTER);
 		getContentPane().add(downLabel, BorderLayout.SOUTH);
@@ -86,15 +83,20 @@ public class Fenetre extends JFrame implements Observer{
 			currentLine = selectedSquare.getLine();
 			currentColumn = selectedSquare.getColumn();
 			
+			//phase de placements initiaaux
 			if(initPhase){
 				controller.setSquareAt(currentLine, currentColumn);
+				
+			//phase de jeu
 			}else{
+				//selection d'un pion joueur
 				if(!squareSelected && controller.thereIsPawnAt(currentLine, currentColumn)){
 					controller.setSquareAt(currentLine, currentColumn);
 					squareSelected = true;
 					currentSelectedSquare = gameBoard.getSquareAt(currentLine, currentColumn);
 					currentSelectedSquare.setBackground(Color.green);
 				}
+				//déplacement du pion si mouvement valide
 				else{
 					controller.setDestSquateAt(currentLine, currentColumn);
 					squareSelected = false;
@@ -122,9 +124,13 @@ public class Fenetre extends JFrame implements Observer{
 		clearBoard();
 		if(justSwitchedTurn(whiteToPlay)) onStandBy = true;
 		if(!initPhase) updateDownLabel(white, black, whiteToPlay);
+		if(controller.playerWin()){
+			upperText.setText("Félicitation !");
+			downLabel.setText("Vous avez gagné !");
+		}
 		
 		if(onStandBy) {
-			onStandBy();
+			putOnStandBy();
 			this.whiteToPlay = whiteToPlay;
 			updatePlayer(white, false, "Blanc");
 			updatePlayer(black, false, "Noir");
@@ -167,7 +173,7 @@ public class Fenetre extends JFrame implements Observer{
 		return this.whiteToPlay != whiteToPlay;
 	}
 	
-	private void onStandBy(){
+	private void putOnStandBy(){
 		setEnabledBoard(false);
 		upperText.setText("Passez au joueur suivant");
 		validate.setVisible(true);
@@ -181,6 +187,8 @@ public class Fenetre extends JFrame implements Observer{
 	
 	private void clearBoard(){
 		for(int i=0; i< Parameters.BOARD_HEIGHT * Parameters.BOARD_WIDTH; i++)
-			gameBoard.getSquareAt(i).setText("");;
+			gameBoard.getSquareAt(i).setText("");
+		
+		gameBoard.setExitsColor();
 	}
 }

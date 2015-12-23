@@ -1,5 +1,6 @@
 package vue;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import javax.swing.JPanel;
 
@@ -32,17 +33,13 @@ public class GameBoard extends JPanel{
 	public Square getSquareAt(int index){
 		return squares[index];
 	}
-	
-	private boolean isOutOfBound(int line, int column){
-		return line < 0 || line >= Parameters.BOARD_HEIGHT || column < 0 || column >= Parameters.BOARD_WIDTH;
-	}
 
-	public void init(){
-		for(int i=1; i<5; i++){
-			setSquareAt("Noir" , 0, i);
-			setSquareAt("Noir" , 1, i);
-			setSquareAt("Blanc" , 4, i);
-			setSquareAt("Blanc" , 5, i);
-		}
+	public void setExitsColor(){
+		Color exitSquareColor = Color.gray;
+		
+		getSquareAt(0, 0).setBackground(exitSquareColor);
+		getSquareAt(0, Parameters.BOARD_WIDTH-1).setBackground(exitSquareColor);
+		getSquareAt(Parameters.BOARD_HEIGHT - 1, 0).setBackground(exitSquareColor);
+		getSquareAt(Parameters.BOARD_HEIGHT-1, Parameters.BOARD_WIDTH-1).setBackground(exitSquareColor);
 	}
 }
