@@ -1,5 +1,4 @@
 package modele;
-import java.awt.Panel;
 import java.util.ArrayList;
 
 import constantes.*;
@@ -40,6 +39,22 @@ public class Player {
 		return allPawnsList;
 	}
 	
+	/**
+	 * Dire combien de pions fantôme gentils il reste au joueur
+	 * @return le nombre de pions fantômes gentils restant
+	 */
+	public int getGoodRemaning(){
+		return goodPawns.size();	
+	}
+
+	/**
+	 * Dire combien de pions fantômes méchants ils restent au joueur
+	 * @return le nombre de 
+	 */
+	public int getBadRemaning(){
+		return badPawns.size();	
+	}
+
 	/**
 	 * instancie les pions fantômes gentils du joueur
 	 * @param goodPawns un tableau de taille 4 de l'ensemble des Good
@@ -201,22 +216,6 @@ public class Player {
 			}	
 		}
 		return false;
-	}
-	
-	/**
-	 * Dire combien de pions fantôme gentils il reste au joueur
-	 * @return le nombre de pions fantômes gentils restant
-	 */
-	public int getGoodRemaning(){
-		return goodPawns.size();	
-	}
-	
-	/**
-	 * Dire combien de pions fantômes méchants ils restent au joueur
-	 * @return le nombre de 
-	 */
-	public int getBadRemaning(){
-		return badPawns.size();	
 	}
 	
 	public boolean allGoodPawnsSet(){

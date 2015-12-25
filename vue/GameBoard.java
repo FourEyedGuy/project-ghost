@@ -2,6 +2,8 @@ package vue;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+
 import javax.swing.JPanel;
 
 import constantes.Parameters;
@@ -34,12 +36,36 @@ public class GameBoard extends JPanel{
 		return squares[index];
 	}
 
-	public void setExitsColor(){
+	public void setExits(){
 		Color exitSquareColor = Color.gray;
 		
 		getSquareAt(0, 0).setBackground(exitSquareColor);
 		getSquareAt(0, Parameters.BOARD_WIDTH-1).setBackground(exitSquareColor);
 		getSquareAt(Parameters.BOARD_HEIGHT - 1, 0).setBackground(exitSquareColor);
 		getSquareAt(Parameters.BOARD_HEIGHT-1, Parameters.BOARD_WIDTH-1).setBackground(exitSquareColor);
+	}
+	
+	public void setEnabled(boolean on){
+		for (Square square : squares)
+			square.setEnabled(on);
+	}
+	
+	public void clear(){
+		for (Square square : squares)
+			square.setText("");
+		
+		setExits();
+	}
+	
+	public void addListeners(ActionListener actionListener){
+		for (Square square:squares){
+			square.addActionListener(actionListener);
+		}
+	}
+	
+	public void removeListeners(ActionListener actionListener){
+		for (Square square:squares){
+			square.addActionListener(actionListener);
+		}
 	}
 }

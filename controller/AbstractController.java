@@ -1,6 +1,5 @@
 package controller;
 
-import constantes.Direction;
 import modele.AbstractModel;
 
 public abstract class AbstractController {
@@ -55,9 +54,21 @@ public abstract class AbstractController {
 	public boolean thereIsPawnAt(int line, int column){
 		return gameMngr.thereIsPawnAt(line, column);
 	}
+	
+	public boolean win(){
+		if(gameMngr.isWhiteToPlay()){
+			if(gameMngr.whitePlayerWon()) return true;
+			else if(gameMngr.blackPlayerWon()) return false;
+			return false;
+		}else{
+			if(gameMngr.blackPlayerWon()) return true;
+			else if(gameMngr.whitePlayerWon()) return false;
+			return false;
+		}
+	}
 
 	public abstract void control();
 	public abstract void initControl();
 	public abstract void playControl();
-	public abstract boolean playerWin();
+	public abstract boolean gameEnded();
 }

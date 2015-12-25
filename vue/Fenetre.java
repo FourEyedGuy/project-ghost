@@ -43,9 +43,8 @@ public class Fenetre extends JFrame implements Observer{
 		
 		this.controller = controller; 
 		gameBoard = new GameBoard();
-		gameBoard.setExitsColor();
-		for(int i=0; i<(Parameters.BOARD_HEIGHT * Parameters.BOARD_WIDTH);i++)
-			gameBoard.getSquareAt(i).addActionListener(new SquareListener());
+		gameBoard.setExits();
+		gameBoard.addListeners(new SquareListener());
 		
 		Font font = new Font("Comic sans MS", Font.BOLD, 20);
 		upperText = new JLabel();
@@ -111,7 +110,7 @@ public class Fenetre extends JFrame implements Observer{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			setEnabledBoard(true);
+			gameBoard.setEnabled(true);
 			onStandBy = false;
 			controller.standByUpdate();
 			validate.setEnabled(false);
@@ -121,12 +120,23 @@ public class Fenetre extends JFrame implements Observer{
 
 	@Override
 	public void update(Player white, Player black, boolean whiteToPlay, boolean initPhase) {
-		clearBoard();
+		gameBoard.clear();;
 		if(justSwitchedTurn(whiteToPlay)) onStandBy = true;
-		if(!initPhase) updateDownLabel(white, black, whiteToPlay);
-		if(controller.playerWin()){
-			upperText.setText("Félicitation !");
-			downLabel.setText("Vous avez gagné !");
+		if(!initPhase) {
+			updateDownLabel(white, black, whiteToPlay);
+			
+			if(controller.gameEnded()){
+				if(controller.win()){
+					upperText.setText("Félicitation !");
+					downLabel.setText("Vous avez gagné ! :)");
+				}
+				else{
+					upperText.setText("Désolé !");
+					downLabel.setText("Vous avez perdu ! :(");
+				}
+				gameBoard.setEnabled(false);
+				return ;
+			}
 		}
 		
 		if(onStandBy) {
@@ -174,21 +184,9 @@ public class Fenetre extends JFrame implements Observer{
 	}
 	
 	private void putOnStandBy(){
-		setEnabledBoard(false);
+		gameBoard.setEnabled(false);
 		upperText.setText("Passez au joueur suivant");
 		validate.setVisible(true);
 		validate.setEnabled(true);
-	}
-	
-	private void setEnabledBoard(boolean on){
-		for(int i=0; i< Parameters.BOARD_HEIGHT * Parameters.BOARD_WIDTH; i++)
-			gameBoard.getSquareAt(i).setEnabled(on);
-	}
-	
-	private void clearBoard(){
-		for(int i=0; i< Parameters.BOARD_HEIGHT * Parameters.BOARD_WIDTH; i++)
-			gameBoard.getSquareAt(i).setText("");
-		
-		gameBoard.setExitsColor();
 	}
 }

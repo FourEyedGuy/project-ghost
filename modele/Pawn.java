@@ -1,6 +1,5 @@
 package modele;
 
-import constantes.Direction;
 import constantes.Parameters;
 
 /**

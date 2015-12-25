@@ -78,7 +78,7 @@ public class Controller extends AbstractController{
 		if(isAValidMove()){
 			gameMngr.movePawnAt(pawnLine, pawnColumn, destLine, destColumn);
 			if(gameMngr.thereIsOpponentPawnAt(destLine, destColumn)) gameMngr.removeOpponentPawnAt(destLine, destColumn);
-			if(!playerWin()) gameMngr.switchTurn();
+			if(!gameEnded()) gameMngr.switchTurn();
 		}
 		
 		//System.out.println("(pawnLine, pawnColumn, destLine, destColumn) - play control :\n(" + pawnLine + "," + pawnColumn + "," + destLine + "," + destColumn +")");
@@ -102,7 +102,7 @@ public class Controller extends AbstractController{
 	}
 
 	@Override
-	public boolean playerWin() {
+	public boolean gameEnded() {
 		return gameMngr.gameEnded();
 	}
 }

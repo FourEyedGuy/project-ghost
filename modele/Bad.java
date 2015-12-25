@@ -1,7 +1,4 @@
 package modele;
-import org.omg.Dynamic.Parameter;
-
-import constantes.*;
 
 /**
  * Mechant fantome

@@ -40,7 +40,8 @@ public class GameManager extends AbstractModel{
 	public String toString(){
 		return white.toString() + black.toString() +
 				"C'est au tour de " + (whiteToPlay? "blanc":"noir") + " de jouer\n" + 
-				"Phase initialisation : " + initPhase;
+				"Phase initialisation : " + initPhase + "\n" + 
+				"Fin de jeu : " + gameEnded();
 	}
 
 	public void addGoodPawnForWhitePlayerAt(int line, int column, boolean winUp) {
