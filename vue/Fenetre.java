@@ -126,7 +126,7 @@ public class Fenetre extends JFrame implements Observer{
 			updateDownLabel(white, black, whiteToPlay);
 			
 			if(controller.gameEnded()){
-				if(controller.win()){
+				if(controller.currentPlayerWin()){
 					upperText.setText("Félicitation !");
 					downLabel.setText("Vous avez gagné ! :)");
 				}
