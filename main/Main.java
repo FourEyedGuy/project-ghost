@@ -8,11 +8,14 @@ import modele.*;
 
 public class Main {
 	public static void main(String[] args) {
+		boolean cheat = false;
+		if(args.length > 0) cheat = args[0].equals("cheat");
+		
 		AbstractModel ghostGame = new GameManager();
 		
 		AbstractController controller = new Controller(ghostGame);
 		
-		Fenetre fenetre = new Fenetre(controller);
+		Fenetre fenetre = new Fenetre(controller, cheat);
 		
 		ghostGame.addObserver(fenetre);
 	}
