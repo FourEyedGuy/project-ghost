@@ -46,6 +46,20 @@ public abstract class AbstractModel implements Observable {
 		return black;
 	}
 	
+	public Player getOpposingPlayer(){
+		if(isWhiteToPlay())
+			return black;
+		else
+			return white;
+	}
+	
+	public Player getCurrentPlayer(){
+		if(isWhiteToPlay())
+			return white;
+		else
+			return black;
+	}
+	
 	/**
 	 * 
 	 * @return true si c'est au joueur blanc de joueur
@@ -67,31 +81,14 @@ public abstract class AbstractModel implements Observable {
 	}
 	
 	public abstract void movePawnAt(int pawnLine, int pawnColumn, int destLine, int destColumn);
-	
-	public abstract void addGoodPawnForWhitePlayerAt(int line, int column, boolean winUp);
-	
-	public abstract void addBadPawnForWhitePlayerAt(int line, int column);
-	
-	public abstract void addGoodPawnForBlackPlayerAt(int line, int column, boolean winUp);
-
-	public abstract void addBadPawnForBlackPlayerAt(int line, int column);
-	
-	public abstract boolean allWhiteGoodPawnsSet();
-	
-	public abstract boolean allWhiteBadPawnsSet();
-	
-	public abstract boolean allBlackGoodPawnsSet();
-	
-	public abstract boolean allBlackBadPawnsSet();
-	
+	public abstract void addCurrentPlayerGoodPwnAt(int line, int column);
+	public abstract void addCurrentPlayerBadPwnAt(int line, int column);
+	public abstract boolean allCurrentPlayerGoodPwnSet();
+	public abstract boolean allCurrentPlayerBadPwnSet();
 	public abstract boolean thereIsPawnAt(int line, int column);
-	
 	public abstract boolean thereIsOpponentPawnAt(int line, int column);
-	
 	public abstract void removeOpponentPawnAt(int line, int column);
-	
 	public abstract boolean whitePlayerWon();
-	
 	public abstract boolean blackPlayerWon();
 	
 	/**

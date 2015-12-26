@@ -17,7 +17,6 @@ import modele.Pawn;
 import modele.Player;
 import observer.Observer;
 
-@SuppressWarnings("serial")
 public class Fenetre extends JFrame implements Observer{
 	private static final int WIDTH = 700;
 	private static final int HEIGHT = 700;
@@ -130,11 +129,11 @@ public class Fenetre extends JFrame implements Observer{
 			
 			if(controller.gameEnded()){
 				if(controller.currentPlayerWin()){
-					upperText.setText("Felicitation !");
-					downLabel.setText("Vous avez gagne ! :)");
+					upperText.setText("Félicitation !");
+					downLabel.setText("Vous avez gagné ! :)");
 				}
 				else{
-					upperText.setText("Desole !");
+					upperText.setText("Désolé !");
 					downLabel.setText("Vous avez perdu ! :(");
 				}
 				gameBoard.setEnabled(false);

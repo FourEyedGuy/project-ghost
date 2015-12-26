@@ -10,6 +10,7 @@ import constantes.Parameters;
  * @author Edgar Liang, Li Huanghuang
  *
  */
+@SuppressWarnings("serial")
 public class Square extends JButton{
 	private int index;
 	

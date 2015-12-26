@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import constantes.Parameters;
 
+@SuppressWarnings("serial")
 public class GameBoard extends JPanel{
 	
 	private Square[] squares = new Square[Parameters.BOARD_WIDTH * Parameters.BOARD_HEIGHT];

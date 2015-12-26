@@ -21,29 +21,15 @@ public class Controller extends AbstractController{
 
 	@Override
 	public void initControl() {
-		if(gameMngr.isWhiteToPlay()){
-			if(!gameMngr.allWhiteGoodPawnsSet()){
-				if(isAValidInitSquare())
-					gameMngr.addGoodPawnForWhitePlayerAt(pawnLine, pawnColumn, true);
-			}else if(!gameMngr.allWhiteBadPawnsSet()){
-				if(isAValidInitSquare())
-					gameMngr.addBadPawnForWhitePlayerAt(pawnLine, pawnColumn);
-			}
+		if(isAValidInitSquare()){
+			if(!gameMngr.allCurrentPlayerGoodPwnSet())
+				gameMngr.addCurrentPlayerGoodPwnAt(pawnLine, pawnColumn);
+			else if(!gameMngr.allCurrentPlayerBadPwnSet())
+				gameMngr.addCurrentPlayerBadPwnAt(pawnLine, pawnColumn);
 			
-			if(gameMngr.allWhiteGoodPawnsSet() && gameMngr.allWhiteBadPawnsSet())
+			if(gameMngr.allCurrentPlayerGoodPwnSet() && gameMngr.allCurrentPlayerBadPwnSet()){
+				if(!gameMngr.isWhiteToPlay()) gameMngr.setInitPhase(false);
 				gameMngr.switchTurn();
-		}else{
-			if(!gameMngr.allBlackGoodPawnsSet()){
-				if(isAValidInitSquare())
-					gameMngr.addGoodPawnForBlackPlayerAt(pawnLine, pawnColumn, true);
-			}else if(!gameMngr.allBlackBadPawnsSet()){
-				if(isAValidInitSquare())
-					gameMngr.addBadPawnForBlackPlayerAt(pawnLine, pawnColumn);
-			}
-			
-			if(gameMngr.allBlackGoodPawnsSet() && gameMngr.allBlackBadPawnsSet()){
-				gameMngr.switchTurn();
-				gameMngr.setInitPhase(false);
 			}
 		}
 		pawnLine = -1;

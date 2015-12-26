@@ -119,26 +119,4 @@ public class GameManager extends AbstractModel{
 				getBlack().allBadBeenCaptured() ||
 				getBlack().aGoodHasExited();
 	}
-
-	@Override
-	public void addCurrentPlayerGoodPwnAt(int line, int column) {
-		getCurrentPlayer().addGoodPawnAt(line, column, isWhiteToPlay());
-		notifyObserver();
-	}
-
-	@Override
-	public void addCurrentPlayerBadPwnAt(int line, int column) {
-		getCurrentPlayer().addBadPawnAt(line, column);
-		notifyObserver();
-	}
-
-	@Override
-	public boolean allCurrentPlayerGoodPwnSet() {
-		return getCurrentPlayer().allGoodPawnsSet();
-	}
-
-	@Override
-	public boolean allCurrentPlayerBadPwnSet() {
-		return getCurrentPlayer().allBadPawnsSet();
-	}
 }
