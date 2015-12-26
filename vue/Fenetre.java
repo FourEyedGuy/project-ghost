@@ -27,7 +27,6 @@ public class Fenetre extends JFrame implements Observer{
 	private JLabel upperText;
 	private JButton validate;
 	private JLabel downLabel;
-	private boolean cheat;
 	private boolean whiteToPlay = true;
 	private boolean onStandBy = false;
 	private boolean initPhase = true;
@@ -35,8 +34,7 @@ public class Fenetre extends JFrame implements Observer{
 	private boolean squareSelected = false;
 	private Square currentSelectedSquare = new Square("");
 	
-	public Fenetre(AbstractController controller, boolean cheat){
-		this.cheat = cheat;
+	public Fenetre(AbstractController controller){
 		
 		setTitle("Project ghost");
 		setSize(WIDTH, HEIGHT);
@@ -122,7 +120,7 @@ public class Fenetre extends JFrame implements Observer{
 
 	@Override
 	public void update(Player white, Player black, boolean whiteToPlay, boolean initPhase) {
-		gameBoard.clear();
+		gameBoard.clear();;
 		if(justSwitchedTurn(whiteToPlay)) onStandBy = true;
 		if(!initPhase) {
 			updateDownLabel(white, black, whiteToPlay);
@@ -143,13 +141,19 @@ public class Fenetre extends JFrame implements Observer{
 		
 		if(onStandBy) {
 			putOnStandBy();
-			updatePlayer(white, cheat, "Blanc");
-			updatePlayer(black, cheat, "Noir");
 			this.whiteToPlay = whiteToPlay;
+			updatePlayer(white, false, "Blanc");
+			updatePlayer(black, false, "Noir");
 		}else{
 			updateUpperLabel(whiteToPlay, initPhase);
-			updatePlayer(white, whiteToPlay || cheat , "Blanc");
-			updatePlayer(black, !whiteToPlay || cheat, "Noir");
+			if(whiteToPlay){
+				updatePlayer(white, true, "");
+				updatePlayer(black, false, "Noir");
+				
+			}else{
+				updatePlayer(black, true, "");
+				updatePlayer(white, false, "Blanc");
+			}
 		}
 		
 		if(this.initPhase != initPhase) this.initPhase = initPhase;
@@ -158,7 +162,7 @@ public class Fenetre extends JFrame implements Observer{
 	private void updatePlayer(Player player, boolean reveal, String coverText){
 		for(Pawn pawn:player.getAllPawns()){
 			if(reveal){
-				gameBoard.setSquareAt((pawn.isGood()? "gentil" : "mechant") + " " + player.getName(), pawn.getLine(), pawn.getColumn());
+				gameBoard.setSquareAt((pawn.isGood()? "gentil" : "mechant"), pawn.getLine(), pawn.getColumn());
 			}
 			else{
 				gameBoard.setSquareAt(coverText, pawn.getLine(), pawn.getColumn());
