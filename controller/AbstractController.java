@@ -55,7 +55,7 @@ public abstract class AbstractController {
 		return gameMngr.thereIsPawnAt(line, column);
 	}
 	
-	public boolean win(){
+	public boolean currentPlayerWin(){
 		if(gameMngr.isWhiteToPlay()){
 			if(gameMngr.whitePlayerWon()) return true;
 			else if(gameMngr.blackPlayerWon()) return false;
