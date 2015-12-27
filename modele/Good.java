@@ -25,11 +25,10 @@ public class Good extends Pawn {
 		return true;
 	}
 	/**
-	 * Dire si le gentil fantome a reussi à sortir en atteignant l'une des deux cases de sortie
+	 * Dire si le gentil fantome a reussi ï¿½ sortir en atteignant l'une des deux cases de sortie
 	 * @return true si le gentil fantome a atteint son objectif
 	 */
 	public boolean exit(){
-		
 		if(getColumn() == 0|| getColumn() == Parameters.BOARD_WIDTH - 1){
 			if((getLine() == 0 && winUp)|| (getLine() == Parameters.BOARD_HEIGHT - 1 && !winUp))
 				return true;

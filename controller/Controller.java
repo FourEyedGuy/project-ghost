@@ -6,6 +6,10 @@ import modele.AbstractModel;
 
 public class Controller extends AbstractController{
 
+	/**
+	 * constructeur 
+	 * @param gameMngr modèle gérant l'état du jeu
+	 */
 	public Controller(AbstractModel gameMngr) {
 		super(gameMngr);
 	}
@@ -17,10 +21,6 @@ public class Controller extends AbstractController{
 		}
 		else
 			playControl();
-		
-		//System.out.println(gameMngr.toString());
-		//System.out.println("(pawnLine, pawnColumn, destLine, destColumn) - apres control :\n(" + pawnLine + "," + pawnColumn + "," + destLine + "," + destColumn +")");
-		//System.out.println();
 	}
 
 	@Override
@@ -51,12 +51,14 @@ public class Controller extends AbstractController{
 			}
 		}
 		
-		//System.out.println("(pawnLine, pawnColumn, destLine, destColumn) - init control :\n(" + pawnLine + "," + pawnColumn + "," + destLine + "," + destColumn +")");
-		
 		pawnLine = -1;
 		pawnColumn = -1;
 	}
 	
+	/**
+	 * dire si la case sélectionnée correspond à une case valide du pion
+	 * @return true si la case sélectionnée correspond à une case valide du pion
+	 */
 	private boolean isAValidInitSquare(){
 		if(gameMngr.isWhiteToPlay()){
 			if(pawnLine >= Parameters.BOARD_HEIGHT-2 && pawnLine < Parameters.BOARD_HEIGHT){
@@ -81,7 +83,6 @@ public class Controller extends AbstractController{
 			if(!gameEnded()) gameMngr.switchTurn();
 		}
 		
-		//System.out.println("(pawnLine, pawnColumn, destLine, destColumn) - play control :\n(" + pawnLine + "," + pawnColumn + "," + destLine + "," + destColumn +")");
 		
 		if(destLine >= 0 && destColumn >= 0){
 			pawnLine = -1;
@@ -93,6 +94,10 @@ public class Controller extends AbstractController{
 		
 	}
 	
+	/**
+	 * dire si le déplacement est valide
+	 * @return vrai si le déplacement est valide
+	 */
 	private boolean isAValidMove(){
 			for(Direction dir:Direction.values()){
 				if(pawnLine + dir.getLine() == destLine && pawnColumn + dir.getColumn() == destColumn && !gameMngr.thereIsPawnAt(destLine, destColumn))

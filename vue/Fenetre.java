@@ -18,25 +18,79 @@ import modele.Player;
 import observer.Observer;
 
 public class Fenetre extends JFrame implements Observer{
+	
+	/**
+	 * largeur de la fênetre 
+	 */
 	private static final int WIDTH = 700;
+	
+	/**
+	 * longueur de la fênetre
+	 */
 	private static final int HEIGHT = 700;
 	
+	/**
+	 * controleur
+	 */
 	private AbstractController controller;
+	
+	/**
+	 * plateau du jeu(les cases sont représentées par des bontons)
+	 */
 	private GameBoard gameBoard;
+	
+	/**
+	 * panneau d'affichage du haut
+	 */
 	private JPanel upperPane;
+	
+	/**
+	 * le texte dans le panneau du haut 
+	 */
 	private JLabel upperText;
+	
+	/**
+	 * le bouton de validation ("OK")
+	 */
 	private JButton validate;
+	
+	/**
+	 * panneau d'affichage d'en bas(il affiche combien de pions ont été pris à l'adversaire
+	 */
 	private JLabel downLabel;
+	
+	/**
+	 * si c'est au blanc de jouer
+	 */
 	private boolean whiteToPlay = true;
+	
+	/**
+	 * si on est en attente de passage de tour à l'adversaire
+	 */
 	private boolean onStandBy = false;
+	
+	/**
+	 * si on est à la phase de placements initiaux
+	 */
 	private boolean initPhase = true;
 	
+	/**
+	 * si un joueur clique sur un de ses pions
+	 */
 	private boolean squareSelected = false;
+	
+	/**
+	 * la case courante selectionnée
+	 */
 	private Square currentSelectedSquare = new Square("");
 	
+	/**
+	 * constructeur instanci la fenêtre
+	 * @param controller controleur
+	 */
 	public Fenetre(AbstractController controller){
 		
-		setTitle("Project ghost");
+		setTitle("Ghost !");
 		setSize(WIDTH, HEIGHT);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -71,6 +125,11 @@ public class Fenetre extends JFrame implements Observer{
 		validate.setVisible(false);
 	}
 	
+	/**
+	 * ecouteur pour les cases du plateau
+	 * @author Li Huanghuang Liang Edgar
+	 *
+	 */
 	class SquareListener implements ActionListener{
 		Square selectedSquare = new Square("");
 		int currentLine = 0;
@@ -95,7 +154,7 @@ public class Fenetre extends JFrame implements Observer{
 					currentSelectedSquare = gameBoard.getSquareAt(currentLine, currentColumn);
 					currentSelectedSquare.setBackground(Color.green);
 				}
-				//d�placement du pion si mouvement valide
+				//d�placement du pion si mouvement valide
 				else{
 					controller.setDestSquateAt(currentLine, currentColumn);
 					squareSelected = false;
@@ -106,6 +165,11 @@ public class Fenetre extends JFrame implements Observer{
 		}
 	}
 	
+	/**
+	 * ecouteur pour le bouton "OK"
+	 * @author Li Huanghuang Liang Edgar
+	 *
+	 */
 	class validateButtonListener implements ActionListener{
 
 		@Override
@@ -120,18 +184,18 @@ public class Fenetre extends JFrame implements Observer{
 
 	@Override
 	public void update(Player white, Player black, boolean whiteToPlay, boolean initPhase) {
-		gameBoard.clear();;
+		gameBoard.clear();
 		if(justSwitchedTurn(whiteToPlay)) onStandBy = true;
 		if(!initPhase) {
 			updateDownLabel(white, black, whiteToPlay);
 			
 			if(controller.gameEnded()){
-				if(controller.win()){
-					upperText.setText("F�licitation !");
-					downLabel.setText("Vous avez gagn� ! :)");
+				if(controller.currentPlayerWin()){
+					upperText.setText("F�licitation !");
+					downLabel.setText("Vous avez gagn� ! :)");
 				}
 				else{
-					upperText.setText("D�sol� !");
+					upperText.setText("D�sol� !");
 					downLabel.setText("Vous avez perdu ! :(");
 				}
 				gameBoard.setEnabled(false);
@@ -170,19 +234,38 @@ public class Fenetre extends JFrame implements Observer{
 		}
 	}
 	
+	/**
+	 * change le texte du haut (qui affiche le tour de jeu)
+	 * @param whiteToPlay si c'est au joueur blanc de jouer
+	 * @param initPhase si on est dans la phase de placements initiaux ou pas
+	 */
 	private void updateUpperLabel(boolean whiteToPlay, boolean initPhase){
 		upperText.setText((initPhase? "(placement init.) ":"") + "C'est aux " + (whiteToPlay? "blanc":"noir") + "s de jouer");
 	}
 	
+	/**
+	 * change le texte du bas (qui affiche les décomptes des pions adverses pris)
+	 * @param white joueur blanc
+	 * @param black joueur noir
+	 * @param whiteToPlay si c'est au joueur blanc de jouer
+	 */
 	private void updateDownLabel(Player white, Player black, boolean whiteToPlay){
 			downLabel.setText("Pions adverses pris : gentils " + (Parameters.NB_GOOD - (whiteToPlay? black:white).getGoodRemaning()) +
 			", mechant " + (Parameters.NB_BAD - (whiteToPlay? black:white).getBadRemaning()));
 	}
 	
+	/**
+	 * Dire si on vient de passer à l'autre joueur (et mettre ainsi en pause)
+	 * @param whiteToPlay si c'est au joueur blanc de jouer
+	 * @return vrai si on a changé de tour
+	 */
 	private boolean justSwitchedTurn(boolean whiteToPlay){
 		return this.whiteToPlay != whiteToPlay;
 	}
 	
+	/**
+	 * met en pause le jeu (pour laisser à un joueur de se retourner et à l'autre de s'installer)
+	 */
 	private void putOnStandBy(){
 		gameBoard.setEnabled(false);
 		upperText.setText("Passez au joueur suivant");

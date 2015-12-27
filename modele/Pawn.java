@@ -3,7 +3,7 @@ package modele;
 import constantes.Parameters;
 
 /**
- * Pion
+ * Pion : il peut Ãªtre soit gentil (Good), soit mÃ©chant (Bad)
  * 
  * @author Edgar Liang, Li Huanghuang
  */
@@ -99,7 +99,7 @@ public abstract class Pawn{
 	}
 	
 	/**
-	 * déplace le pion à position indiqué
+	 * dï¿½place le pion ï¿½ position indiquï¿½
 	 * 
 	 * @param la ligne sur laquelle est situe la case vers laquelle se deplacer
 	 * @paraml la colonne sur laquelle est situe la case vers laquelle se deplacer
@@ -109,7 +109,7 @@ public abstract class Pawn{
 	}
 	
 	/**
-	 * si le pion est un bon fantome
+	 * si le pion est un gentil fantome
 	 */
 	public abstract boolean isGood();
 	
