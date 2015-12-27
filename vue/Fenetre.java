@@ -125,44 +125,50 @@ public class Fenetre extends JFrame implements Observer{
 	public void update(Player white, Player black, boolean whiteToPlay, boolean initPhase) {
 		gameBoard.clear();
 		if(justSwitchedTurn(whiteToPlay)) onStandBy = true;
+		
 		if(!initPhase) {
 			updateDownLabel(white, black, whiteToPlay);
 			
 			if(controller.gameEnded()){
 				if(controller.currentPlayerWin()){
-					upperText.setText("Felicitation !");
+					upperText.setText("Felicitation " + (whiteToPlay? white.getName():black.getName()) + " !");
 					downLabel.setText("Vous avez gagne ! :)");
 				}
 				else{
-					upperText.setText("Desole !");
+					upperText.setText("Desole " + (whiteToPlay? white.getName():black.getName()) + " ...");
 					downLabel.setText("Vous avez perdu ! :(");
 				}
 				gameBoard.setEnabled(false);
+				updatePlayer(white, true);
+				updatePlayer(black, true);
+				
 				return ;
 			}
 		}
 		
 		if(onStandBy) {
 			putOnStandBy();
-			updatePlayer(white, cheat, "Blanc");
-			updatePlayer(black, cheat, "Noir");
+			updatePlayer(white, cheat);
+			updatePlayer(black, cheat);
 			this.whiteToPlay = whiteToPlay;
 		}else{
 			updateUpperLabel(whiteToPlay, initPhase);
-			updatePlayer(white, whiteToPlay || cheat , "Blanc");
-			updatePlayer(black, !whiteToPlay || cheat, "Noir");
+			updatePlayer(white, whiteToPlay || cheat);
+			updatePlayer(black, !whiteToPlay || cheat);
 		}
 		
 		if(this.initPhase != initPhase) this.initPhase = initPhase;
 	}
 	
-	private void updatePlayer(Player player, boolean reveal, String coverText){
+	private void updatePlayer(Player player, boolean reveal){
+		String sideName = player.getName();
+		
 		for(Pawn pawn:player.getAllPawns()){
 			if(reveal){
-				gameBoard.setSquareAt((pawn.isGood()? "gentil" : "mechant") + " " + player.getName(), pawn.getLine(), pawn.getColumn());
+				gameBoard.setSquareAt((pawn.isGood()? "gentil" : "mechant") + " " + sideName.charAt(0), pawn.getLine(), pawn.getColumn());
 			}
 			else{
-				gameBoard.setSquareAt(coverText, pawn.getLine(), pawn.getColumn());
+				gameBoard.setSquareAt(sideName, pawn.getLine(), pawn.getColumn());
 			}
 		}
 	}
