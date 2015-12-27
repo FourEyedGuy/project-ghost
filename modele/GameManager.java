@@ -1,7 +1,7 @@
 package modele;
 
 /**
- * La classe qui est chargé du déroulement du jeu
+ * La classe qui est chargï¿½ du dï¿½roulement du jeu
  * @author Edgar Liang, Li Huanghuang
  *
  */
@@ -17,11 +17,17 @@ public class GameManager extends AbstractModel{
 	}
 	
 	/**
-	 * Constructeur avec les noms par défauts ("Blanc" pour white et "Noir" pour black)
+	 * Constructeur avec les noms par dï¿½fauts ("Blanc" pour white et "Noir" pour black)
 	 */
 	public GameManager(){
 		super();
 	}
+	
+	/**
+	 * On commencee Ã  dÃ©placer les pions de joueur de WHITE au coordonÃ©e indiquÃ©e
+	 * Ensuite on le fera avec le joueur de BLACK
+	 * A la fin on averti l'obeservateur des changements
+	 */
 	
 	public void movePawnAt(int pawnLine, int pawnColumn, int destLine, int destColumn){
 		if(whiteToPlay)
@@ -32,6 +38,7 @@ public class GameManager extends AbstractModel{
 		notifyObserver();
 	}
 	
+	@Override
 	public void switchTurn(){
 		whiteToPlay = !whiteToPlay;
 		notifyObserver();
@@ -112,7 +119,7 @@ public class GameManager extends AbstractModel{
 				getWhite().allBadBeenCaptured() || 
 				getWhite().aGoodHasExited();
 	}
-
+	
 	@Override
 	public boolean blackPlayerWon() {
 		return getWhite().allGoodBeenCaptured() ||
