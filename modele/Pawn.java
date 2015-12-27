@@ -3,7 +3,7 @@ package modele;
 import constantes.Parameters;
 
 /**
- * Pion : il peut Ãªtre soit gentil (Good), soit mÃ©chant (Bad)
+ * Pion : il peut être soit gentil (Good), soit méchant (Bad)
  * 
  * @author Edgar Liang, Li Huanghuang
  */
