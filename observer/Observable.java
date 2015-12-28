@@ -1,23 +1,23 @@
 package observer;
 
 /**
- * interface observable : est observÃ© par un(des) observateur(s), l' (les) avertit de tout changement en lui
+ * interface observable : est observé par un(des) observateur(s), l' (les) avertir de tout changement en lui
  * @author Liang Edgar, Li Huanghuang
  */
 public interface Observable {
 	/**
 	 * ajoute un observateur dans la liste
-	 * @param obs
+	 * @param obs obsservateur à ajouter
 	 */
 	public void addObserver(Observer obs);
 	
 	/**
-	 * enlÃ¨ve un observateur de la liste
+	 * enlève un observateur de la liste
 	 */
 	public void removeObserver();
 	
 	/**
-	 * prÃ©vient les observateurs de liste d'un changement chez l'observÃ© (observable)
+	 * prévient les observateurs de liste d'un changement chez l'observé (observable)
 	 */
 	public void notifyObserver();
 }

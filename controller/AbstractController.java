@@ -98,9 +98,9 @@ public abstract class AbstractController {
 	}
 	
 	/**
-	 * instancie et contrÃ´le les coordonnÃ©es concernant la case de destination
-	 * @param line la ligne sur laquelle est situÃ© la case de destination
-	 * @param column la colonne sur laquelle est situÃ© la case de destination
+	 * instancie et contrôle les coordonnées concernant la case de destination
+	 * @param destLine la ligne sur laquelle est situé la case de destination
+	 * @param destColumn la colonne sur laquelle est situé la case de destination
 	 */
 	public void setDestSquateAt(int destLine, int destColumn){
 		setDestLine(destLine);

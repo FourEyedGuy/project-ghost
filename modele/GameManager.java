@@ -1,7 +1,7 @@
 package modele;
 
 /**
- * La classe qui est chargï¿½ du dï¿½roulement du jeu
+ * La classe qui est chargée du gérer l'état du jeu
  * @author Edgar Liang, Li Huanghuang
  *
  */
@@ -17,18 +17,13 @@ public class GameManager extends AbstractModel{
 	}
 	
 	/**
-	 * Constructeur avec les noms par dï¿½fauts ("Blanc" pour white et "Noir" pour black)
+	 * Constructeur avec les noms par défauts ("Blanc" pour white et "Noir" pour black)
 	 */
 	public GameManager(){
 		super();
 	}
 	
-	/**
-	 * On commencee Ã  dÃ©placer les pions de joueur de WHITE au coordonÃ©e indiquÃ©e
-	 * Ensuite on le fera avec le joueur de BLACK
-	 * A la fin on averti l'obeservateur des changements
-	 */
-	
+	@Override
 	public void movePawnAt(int pawnLine, int pawnColumn, int destLine, int destColumn){
 		if(whiteToPlay)
 			white.movePawnAtTo(pawnLine, pawnColumn, destLine, destColumn);
@@ -44,49 +39,18 @@ public class GameManager extends AbstractModel{
 		notifyObserver();
 	}
 	
+	/**
+	 * Renvoie le String décrivant l'état du GameManager
+	 */
 	public String toString(){
 		return white.toString() + black.toString() +
 				"C'est au tour de " + (whiteToPlay? "blanc":"noir") + " de jouer\n" + 
 				"Phase initialisation : " + initPhase + "\n" + 
 				"Fin de jeu : " + gameEnded();
 	}
-
-	public void addGoodPawnForWhitePlayerAt(int line, int column, boolean winUp) {
-		white.addGoodPawnAt(line, column, winUp);
-		notifyObserver();
-	}
-
-	public void addBadPawnForWhitePlayerAt(int line, int column) {
-		white.addBadPawnAt(line, column);
-		notifyObserver();
-	}
-
-	public void addGoodPawnForBlackPlayerAt(int line, int column, boolean winUp) {
-		black.addGoodPawnAt(line, column, winUp);
-		notifyObserver();
-	}
-
-	public void addBadPawnForBlackPlayerAt(int line, int column) {
-		black.addBadPawnAt(line, column);
-		notifyObserver();
-	}
 	
-	public boolean allWhiteGoodPawnsSet(){
-		return white.allGoodPawnsSet();	
-	}
 	
-	public boolean allWhiteBadPawnsSet(){
-		return white.allBadPawnsSet();
-	}
 	
-	public boolean allBlackGoodPawnsSet(){
-		return black.allGoodPawnsSet();	
-	}
-	
-	public boolean allBlackBadPawnsSet(){
-		return black.allBadPawnsSet();
-	}
-
 	@Override
 	public boolean thereIsPawnAt(int line, int column) {
 		if(whiteToPlay)

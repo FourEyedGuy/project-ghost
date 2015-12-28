@@ -3,17 +3,17 @@ package vue;
 import java.awt.Color;
 import javax.swing.JButton;
 
-import constantes.Parameters;
+import utils.Parameters;
 
 /**
- * 
+ * La classe représentant une case du plateau de jeu
  * @author Edgar Liang, Li Huanghuang
  *
  */
 @SuppressWarnings("serial")
 public class Square extends JButton{
 	/**
-	 * l'index de la case, c'est pour mieux le reperer par rapport au plateau (GameBoard)
+	 * l'index de la case
 	 */
 	private int index;
 	
@@ -35,21 +35,21 @@ public class Square extends JButton{
 	
 	/**
 	 * change la valeur de la case courante
-	 * @param index valeur Ã  mettre
+	 * @param index valeur à mettre
 	 */
 	public void setIndex(int index) {
 		this.index = index;
 	}
 	
 	/**
-	 * retourne la ligne correspond Ã  l'index
+	 * retourne la ligne sur laquelle est situé la case
 	 */
 	public int getLine(){
 		return index/Parameters.BOARD_WIDTH;
 	}
 	
 	/**
-	 * retourne la colone correspond Ã  l'index
+	 * retourne la colonne sur laquelle est situé la case
 	 */
 	public int getColumn(){
 		return index%Parameters.BOARD_WIDTH;

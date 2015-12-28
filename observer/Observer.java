@@ -9,11 +9,11 @@ import modele.Player;
  */
 public interface Observer {
 	/**
-	 * mettre l'observateur Ã  jour, avec les objets passÃ© en arguments
-	 * @param white le joueur blanc (en bas au dÃ©but)
-	 * @param black le joueur noir (en haut au dÃ©but)
+	 * mettre l'observateur à jour, avec les objets passé en arguments
+	 * @param white le joueur blanc (en bas au début)
+	 * @param black le joueur noir (en haut au début)
 	 * @param whiteToPlay si c'est au joueur blanc de jouer
-	 * @param initPhase si on est Ã  la phase de placements initiaux des pions
+	 * @param initPhase si on est à la phase de placements initiaux des pions
 	 */
 	public void update(Player white, Player black, boolean whiteToPlay, boolean initPhase);
 }

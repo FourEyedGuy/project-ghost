@@ -6,19 +6,19 @@ import observer.Observable;
 import observer.Observer;
 
 /**
- * Classe abstraite gÃ©rant le modÃ¨le 
+ * Classe abstraite modèle : le modèle est chargé de gérer l'état du jeu 
  * @author Edgar Liang, HuangHuang Li
  *
  */
 public abstract class AbstractModel implements Observable {
 	
 	/**
-	 * le joueur blanc (celui qui place ses pions en bas Ã  la phase initiale)
+	 * le joueur blanc (celui qui place ses pions en bas à la phase initiale)
 	 */
 	protected Player white;
 	
 	/**
-	 * le joueur noir (celui qui place ses pions en haut Ã  la phase initiale)
+	 * le joueur noir (celui qui place ses pions en haut à la phase initiale)
 	 */
 	protected Player black;
 	
@@ -28,12 +28,12 @@ public abstract class AbstractModel implements Observable {
 	private ArrayList<Observer> observersList = new ArrayList<Observer>();
 	
 	/**
-	 * true si c'est au joueur blanc de jouer (premier joueur par dï¿½faut)
+	 * true si c'est au joueur blanc de jouer (premier joueur par défaut)
 	 */
 	protected boolean whiteToPlay = true;
 	
 	/**
-	 * true si on est ï¿½ la phase d'initialisation (placement initial des pions)
+	 * true si on est à la phase d'initialisation (placement initial des pions)
 	 */
 	protected boolean initPhase = true;
 	
@@ -56,7 +56,7 @@ public abstract class AbstractModel implements Observable {
 	}
 	
 	/**
-	 * 
+	 * revoie le joueur blanc (le joueur du bas du plateau et premier joueur)
 	 * @return le joueur blanc
 	 */
 	public Player getWhite() {
@@ -64,13 +64,17 @@ public abstract class AbstractModel implements Observable {
 	}
 
 	/**
-	 * 
+	 * renvoie le joueur noir (le joueur du haut du plateau et second joueur)
 	 * @return le joueur noir
 	 */
 	public Player getBlack() {
 		return black;
 	}
 	
+	/**
+	 * renvoie l'ardversaire du joueur dont c'est le tour
+	 * @return le joueur adversaire du joueur courant
+	 */
 	public Player getOpposingPlayer(){
 		if(isWhiteToPlay())
 			return black;
@@ -78,6 +82,10 @@ public abstract class AbstractModel implements Observable {
 			return white;
 	}
 	
+	/**
+	 * renvoie le joueur dont c'est le tour
+	 * @return le joueur courant
+	 */
 	public Player getCurrentPlayer(){
 		if(isWhiteToPlay())
 			return white;
@@ -86,7 +94,7 @@ public abstract class AbstractModel implements Observable {
 	}
 	
 	/**
-	 * 
+	 * Dire si c'est au joueur blanc de jouer
 	 * @return true si c'est au joueur blanc de joueur
 	 */
 	public boolean isWhiteToPlay(){
@@ -107,15 +115,15 @@ public abstract class AbstractModel implements Observable {
 	}
 
 	/**
-	 * mettre l'attribut initPhase à  la valeur demandée
-	 * @param initPhase valeur booléenne à  mettre
+	 * mettre l'attribut initPhase à la valeur demandée
+	 * @param initPhase valeur booléenne à mettre
 	 */
 	public void setInitPhase(boolean initPhase) {
 		this.initPhase = initPhase;
 		notifyObserver();
 	}
 	/**
-	 * dÃ©placer le pion (pawn) aux coordonÃ©es indiquÃ©es vers les coordonnÃ©es de destination
+	 * déplacer le pion (pawn) aux coordonées indiquées vers les coordonnées de destination
 	 * @param pawnLine ligne sur laquelle est le pion
 	 * @param pawnColumn colonne sur laquelle est le pion
 	 * @param destLine ligne de la case destination
@@ -162,14 +170,23 @@ public abstract class AbstractModel implements Observable {
 	 */
 	public abstract void removeOpponentPawnAt(int line, int column);
 	
+	/**
+	 * Dire si le joueur blanc a gagné
+	 * @return true si Blanc a gagné
+	 */
 	public abstract boolean whitePlayerWon();
+	
+	/**
+	 * Dire si le joueur noir a gagné
+	 * @return true si Noir a gagné
+	 */
 	public abstract boolean blackPlayerWon();
 
 	/**
-	 * Dire si le jeu est fini, si les conditions de fin de jeu est réalisé :
+	 * Dire si le jeu est fini, si l'une des conditions de fin de jeu est réalisée :
 	 * - Un joueur a capturé tout les bon fantômes de son adversaire
 	 * - Un joueur a capturé tout les mauvais fantôme de son adversaire
-	 * - Un joueur a reussi à faire sortir tout ses bon fantomes
+	 * - Un joueur a réussi à faire sortir tout ses bon fantômes
 	 * 
 	 * @return true si le jeu est terminé
 	 */

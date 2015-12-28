@@ -1,16 +1,16 @@
 package modele;
 
 /**
- * Mechant fantome
- * @author Edgar
+ * Pion Méchant fantôme
+ * @author Edgar Liang, Li Huanghuang
  *
  */
 public class Bad extends Pawn {
 
 	/**
-	 * creer un pion mechant et le placer aux coordonnees demandees
-	 * @param line
-	 * @param column
+	 * créer un pion méchant et le placer aux coordonnées demandées
+	 * @param line la ligne sur laquelle est situé la case cible
+	 * @param column la colonne sur laquelle est situé la case cible
 	 */
 	public Bad(int line, int column) {
 		super(line, column);

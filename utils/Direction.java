@@ -1,7 +1,7 @@
-package constantes;
+package utils;
 
 /**
- * Les quatre directions que le joueur peut choisir pour chacun de ses pions
+ * Les directions que le joueur peut choisir pour chacun de ses pions
  * @author Edgar Liang, Huanghuang Li
  *
  */
@@ -21,14 +21,14 @@ public enum Direction {
 	}
 
 	/**
-	 * le facteur de dÃ©placement horizontal de la direction
+	 * le facteur de déplacement horizontal de la direction
 	 */
 	public int getLine() {
 		return line;
 	}
 
 	/**
-	 * le facteur de dÃ©placement vertical de la direction
+	 * le facteur de déplacement vertical de la direction
 	 */
 	public int getColumn() {
 		return column;

@@ -1,10 +1,10 @@
 package modele;
 import java.util.ArrayList;
 
-import constantes.*;
+import utils.*;
 
 /**
- * La classe joueur
+ * La classe joueur, l'objet joueur a un nom, et deux listes de pions : pions gentils et pions méchants
  * @author Edgar
  *
  */
@@ -24,13 +24,17 @@ public class Player {
 	}
 	
 	/**
+	 * renvoie le nom du joueur
 	 * @return le nom du joueur
 	 */
 	public String getName(){
 		return this.name;
 	}
 	
-	
+	/**
+	 * Renvoie la liste de tous les pions (gentils et méchants indistinctement) du joueurs
+	 * @return la liste de tous les pions du joueur
+	 */
 	public ArrayList<Pawn> getAllPawns(){
 		ArrayList<Pawn> allPawnsList = new ArrayList<Pawn>();
 		allPawnsList.addAll(goodPawns);
@@ -57,7 +61,7 @@ public class Player {
 
 	/**
 	 * instancie les pions fantômes gentils du joueur
-	 * @param goodPawns un tableau de taille 4 de l'ensemble des Good
+	 * @param goodPawns  la liste de l'ensemble des Good
 	 */
 	public void setGoodPawns(ArrayList<Good> goodPawns) {
 		this.goodPawns = goodPawns;
@@ -65,7 +69,7 @@ public class Player {
 	
 	/**
 	 * instancie les pions fantômes méchants du joueur
-	 * @param badPawns un tableau de taille 4 de l'ensemble des Bad
+	 * @param badPawns la liste de l'ensemble des Bad
 	 */
 	public void setBadPawns(ArrayList<Bad> badPawns) {
 		this.badPawns = badPawns;
@@ -73,9 +77,9 @@ public class Player {
 	
 	/**
 	 * Ajoute aux coordonnées indiquées un pion fantôme gentils
-	 * @param line
-	 * @param column
-	 * 
+	 * @param line la ligne sur laquelle est située la case cible
+	 * @param column la colonne sur laquelle est située la case cible
+	 * @param winUp si le pion gentil doit gagner en sortant par l'une des coins supérieurs
 	 * @return true si un pion a effectivement été ajouté
 	 */
 	public boolean addGoodPawnAt(int line, int column, boolean winUp){
@@ -95,8 +99,8 @@ public class Player {
 	
 	/**
 	 * Ajoute aux coordonnées indiquées un pion fantôme méchants
-	 * @param line
-	 * @param column
+	 * @param line ligne sur laquelle est situé la case cible
+	 * @param column la colonne sur laquelle est situé la case cible
 	 * 
 	 * @return true si un pion a effectivement été ajouté
 	 */
@@ -218,14 +222,25 @@ public class Player {
 		return false;
 	}
 	
+	/**
+	 * Dire si tous les pions gentils du joueur ont été placés sur le plateau
+	 * @return true si tous les pions gentils ont été placés
+	 */
 	public boolean allGoodPawnsSet(){
 		return getGoodRemaning() == Parameters.NB_GOOD;
 	}
 	
+	/**
+	 * Dire si tous les pions méchants du joueur ont été placés sur le plateau
+	 * @return true si tous les pions méchants ont été placés
+	 */
 	public boolean allBadPawnsSet(){
 		return getBadRemaning() == Parameters.NB_BAD;
 	}
 	
+	/**
+	 * Renvoie le String décrivant l'état du joueur
+	 */
 	public String toString(){
 		String goodPawnsStr = "";
 		String badPawnsStr = "";

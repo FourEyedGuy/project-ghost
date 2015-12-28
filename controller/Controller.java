@@ -1,14 +1,17 @@
 package controller;
 
-import constantes.Direction;
-import constantes.Parameters;
 import modele.AbstractModel;
+import utils.Direction;
+import utils.Parameters;
 
+/**
+ * la classe contrôleur héritant de AbstractController
+ */
 public class Controller extends AbstractController{
 
 	/**
 	 * constructeur 
-	 * @param gameMngr modÃ¨le gÃ©rant l'Ã©tat du jeu
+	 * @param gameMngr modèle gérant l'état du jeu
 	 */
 	public Controller(AbstractModel gameMngr) {
 		super(gameMngr);
@@ -42,8 +45,8 @@ public class Controller extends AbstractController{
 	}
 	
 	/**
-	 * dire si la case sÃ©lectionnÃ©e correspond Ã  une case valide du pion
-	 * @return true si la case sÃ©lectionnÃ©e correspond Ã  une case valide du pion
+	 * dire si la case sélectionnée correspond à une case valide du pion
+	 * @return true si la case sélectionnée correspond à une case valide du pion
 	 */
 	private boolean isAValidInitSquare(){
 		if(gameMngr.isWhiteToPlay()){
@@ -68,21 +71,18 @@ public class Controller extends AbstractController{
 			if(gameMngr.thereIsOpponentPawnAt(destLine, destColumn)) gameMngr.removeOpponentPawnAt(destLine, destColumn);
 			if(!gameEnded()) gameMngr.switchTurn();
 		}
-		
-		
+
 		if(destLine >= 0 && destColumn >= 0){
 			pawnLine = -1;
 			pawnColumn = -1;
 			destLine = -1;
 			destColumn = -1;
 		}
-		
-		
 	}
 	
 	/**
-	 * dire si le dÃ©placement est valide
-	 * @return vrai si le dÃ©placement est valide
+	 * dire si le déplacement est valide
+	 * @return vrai si le déplacement est valide
 	 */
 	private boolean isAValidMove(){
 			for(Direction dir:Direction.values()){

@@ -11,32 +11,37 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import constantes.Parameters;
 import controller.AbstractController;
 import modele.Pawn;
 import modele.Player;
 import observer.Observer;
+import utils.Parameters;
 
+/**
+ * la classe chargé de l'interface graphique (affichage de la fenêtre)
+ * @author Edgar Liang, Li Huanghuang
+ *
+ */
 @SuppressWarnings("serial")
 public class Fenetre extends JFrame implements Observer{
 	
 	/**
-	 * largeur de la fenetre 
+	 * largeur de la fenêtre 
 	 */
 	private static final int WIDTH = 700;
 	
 	/**
-	 * longueur de la fÃªnetre
+	 * longueur de la fenêtre
 	 */
 	private static final int HEIGHT = 700;
 	
 	/**
-	 * controleur
+	 * contrôleur
 	 */
 	private AbstractController controller;
 	
 	/**
-	 * plateau du jeu(les cases sont representees par des bontons)
+	 * plateau de jeu 
 	 */
 	private GameBoard gameBoard;
 	
@@ -56,7 +61,7 @@ public class Fenetre extends JFrame implements Observer{
 	private JButton validate;
 	
 	/**
-	 * panneau d'affichage d'en bas(il affiche combien de pions ont Ã©tÃ© pris Ã  l'adversaire
+	 * panneau d'affichage du bas(il affiche combien de pions ont été pris à l'adversaire et leurs types)
 	 */
 	private JLabel downLabel;
 	
@@ -66,17 +71,17 @@ public class Fenetre extends JFrame implements Observer{
 	private boolean whiteToPlay = true;
 	
 	/**
-	 * si on est en attente de passage de tour Ã  l'adversaire
+	 * si on est en attente de passage de tour à l'adversaire
 	 */
 	private boolean onStandBy = false;
 	
 	/**
-	 * si on est Ã  la phase de placements initiaux
+	 * si on est à la phase de placements initiaux
 	 */
 	private boolean initPhase = true;
 	
 	/**
-	 * si un joueur clique sur un de ses pions
+	 * si un joueur a sélectionné une case
 	 */
 	private boolean aSquareIsSelected = false;
 	
@@ -91,8 +96,9 @@ public class Fenetre extends JFrame implements Observer{
 	private boolean cheat = false;
 	
 	/**
-	 * constructeur instanci la fenetre
-	 * @param controller controleur
+	 * constructeur : instancie la fenetre
+	 * @param controller controleur, contrôle les entrées (les cliques) sur les JButton
+	 * @param cheat true pour afficher tous les pions en standBy, false pour cacher les pions adverses pendant le standBy
 	 */
 	public Fenetre(AbstractController controller, boolean cheat){
 		this.cheat = cheat;
@@ -133,9 +139,7 @@ public class Fenetre extends JFrame implements Observer{
 	}
 	
 	/**
-	 * ecouteur pour les cases du plateau
-	 * @author Li Huanghuang Liang Edgar
-	 *
+	 * écouteur pour les cases du plateau
 	 */
 	class SquareListener implements ActionListener{
 		Square selectedSquare = new Square("");
@@ -173,7 +177,7 @@ public class Fenetre extends JFrame implements Observer{
 	}
 	
 	/**
-	 * ecouteur pour le bouton "OK"
+	 * écouteur pour le bouton "OK"
 	 * @author Li Huanghuang Liang Edgar
 	 *
 	 */
@@ -251,7 +255,7 @@ public class Fenetre extends JFrame implements Observer{
 	}
 	
 	/**
-	 * change le texte du bas (qui affiche les dÃ©comptes des pions adverses pris)
+	 * change le texte du bas (qui affiche les décomptes des pions adverses pris)
 	 * @param white joueur blanc
 	 * @param black joueur noir
 	 * @param whiteToPlay si c'est au joueur blanc de jouer
@@ -262,16 +266,16 @@ public class Fenetre extends JFrame implements Observer{
 	}
 	
 	/**
-	 * Dire si on vient de passer Ã  l'autre joueur (et mettre ainsi en pause)
-	 * @param whiteToPlay si c'est au joueur blanc de jouer
-	 * @return vrai si on a changÃ© de tour
+	 * Dire si on vient de passer à l'autre joueur (et mettre ainsi en pause)
+	 * @param whiteToPlay la variable à comparer avec whiteToPlay courant
+	 * @return vrai si on a changé de tour
 	 */
 	private boolean justSwitchedTurn(boolean whiteToPlay){
 		return this.whiteToPlay != whiteToPlay;
 	}
 	
 	/**
-	 * met en pause le jeu (pour laisser Ã  un joueur de se retourner et Ã  l'autre de s'installer)
+	 * met en pause le jeu (pour laisser le temps à un joueur de se retourner et à l'autre joueur de s'installer)
 	 */
 	private void putOnStandBy(){
 		gameBoard.setEnabled(false);

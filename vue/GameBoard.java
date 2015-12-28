@@ -6,8 +6,12 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
-import constantes.Parameters;
+import utils.Parameters;
 
+/**
+ * la classe construisant le plateau du jeu dans la fenÍtre
+ * @author Edgar Liang
+ */
 @SuppressWarnings("serial")
 public class GameBoard extends JPanel{
 	
@@ -30,10 +34,10 @@ public class GameBoard extends JPanel{
 	}
 	
 	/**
-	 * change le texte de la case indiqu√©e
+	 * change le texte de la case indiquÈe
 	 * @param text texte √† mettre
-	 * @param line ligne sur laquelle est situ√©e la case indiqu√©e
-	 * @param column colonne sur laquelle est situ√© la case indiqu√©e
+	 * @param line ligne sur laquelle est situÈe la case indiquÈe
+	 * @param column colonne sur laquelle est situ√© la case indiquÈe
 	 */
 	public void setSquareAt(String text, int line, int column){
 		int index = line * Parameters.BOARD_WIDTH + column;
@@ -42,19 +46,19 @@ public class GameBoard extends JPanel{
 	}
 	
 	/**
-	 * Renvoyer la case aux coordonn√©es indiqu√©es
-	 * @param line la ligne sur laquelle est situ√© la case
-	 * @param column la colonne sur laquelle est situ√© la case
-	 * @return la case aux coordonn√©es (ligne, colonne)
+	 * Renvoie la case aux coordonnÈes indiquÈes
+	 * @param line la ligne sur laquelle est situÈe la case
+	 * @param column la colonne sur laquelle est situÈe la case
+	 * @return la case aux coordonnÈes (ligne, colonne)
 	 */
 	public Square getSquareAt(int line, int column){
 		return squares[line * Parameters.BOARD_WIDTH + column];
 	}
 	
 	/**
-	 * Renvoyer la case √† l'index demand√©e
-	 * @param index l'index de la case demand√©e
-	 * @return la case √† l'index index
+	 * Renvoyer la case ‡ l'index demandÈe
+	 * @param index l'index de la case demandÈe
+	 * @return la case ‡ l'index index
 	 */
 	public Square getSquareAt(int index){
 		return squares[index];
@@ -73,8 +77,8 @@ public class GameBoard extends JPanel{
 	}
 	
 	/**
-	 * active ou d√©sactive l'ensemble des boutons (cases) du plateau de jeu
-	 * @param on true pour activer, false pour d√©sactiver
+	 * active ou dÈsactive l'ensemble des boutons (cases) du plateau de jeu
+	 * @param on true pour activer, false pour dÈsactiver
 	 */
 	public void setEnabled(boolean on){
 		for (Square square : squares)
@@ -92,8 +96,8 @@ public class GameBoard extends JPanel{
 	}
 	
 	/**
-	 * Ajoute un √©couteur √† chacun des cases du plateau
-	 * @param actionListener √©couteur √† ajouter
+	 * Ajoute un Ècouteur ‡† chacun des cases du plateau
+	 * @param actionListener Ècouteur ‡ ajouter
 	 */
 	public void addListeners(ActionListener actionListener){
 		for (Square square:squares){
@@ -102,8 +106,8 @@ public class GameBoard extends JPanel{
 	}
 	
 	/**
-	 * enl√®ve un √©couteur √† l'ensemble des cases du plateau
-	 * @param actionListener √©couteur √† enlever
+	 * enlËve un Ècouteur ‡ l'ensemble des cases du plateau
+	 * @param actionListener Ècouteur ‡ enlever
 	 */
 	public void removeListeners(ActionListener actionListener){
 		for (Square square:squares){
