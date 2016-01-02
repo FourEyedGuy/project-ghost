@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,10 +16,11 @@ import controller.AbstractController;
 import modele.Pawn;
 import modele.Player;
 import observer.Observer;
+import utils.Direction;
 import utils.Parameters;
 
 /**
- * la classe chargé de l'interface graphique (affichage de la fenêtre)
+ * la classe chargÃ© de l'interface graphique (affichage de la fenÃªtre)
  * @author Edgar Liang, Li Huanghuang
  *
  */
@@ -26,17 +28,17 @@ import utils.Parameters;
 public class Fenetre extends JFrame implements Observer{
 	
 	/**
-	 * largeur de la fenêtre 
+	 * largeur de la fenÃªtre 
 	 */
 	private static final int WIDTH = 700;
 	
 	/**
-	 * longueur de la fenêtre
+	 * longueur de la fenÃªtre
 	 */
 	private static final int HEIGHT = 700;
 	
 	/**
-	 * contrôleur
+	 * contrÃ´leur
 	 */
 	private AbstractController controller;
 	
@@ -61,7 +63,7 @@ public class Fenetre extends JFrame implements Observer{
 	private JButton validate;
 	
 	/**
-	 * panneau d'affichage du bas(il affiche combien de pions ont été pris à l'adversaire et leurs types)
+	 * panneau d'affichage du bas(il affiche combien de pions ont Ã©tÃ© pris Ã  l'adversaire et leurs types)
 	 */
 	private JLabel downLabel;
 	
@@ -71,17 +73,17 @@ public class Fenetre extends JFrame implements Observer{
 	private boolean whiteToPlay = true;
 	
 	/**
-	 * si on est en attente de passage de tour à l'adversaire
+	 * si on est en attente de passage de tour Ã  l'adversaire
 	 */
 	private boolean onStandBy = false;
 	
 	/**
-	 * si on est à la phase de placements initiaux
+	 * si on est Ã  la phase de placements initiaux
 	 */
 	private boolean initPhase = true;
 	
 	/**
-	 * si un joueur a sélectionné une case
+	 * si un joueur a selectionne une case
 	 */
 	private boolean aSquareIsSelected = false;
 	
@@ -91,28 +93,36 @@ public class Fenetre extends JFrame implements Observer{
 	private Square currentSelectedSquare = new Square("");
 	
 	/**
+	 * pour le pion fantÃ´me courant sÃ©lectionnÃ©, contient l'ensemble des cases de dÃ©placements possibles
+	 */
+	private ArrayList<Square> possibleMovesSquares = new ArrayList<Square>();
+	
+	/**
 	 * si le jeu est en mode triche
 	 */
 	private boolean cheat = false;
 	
 	/**
 	 * constructeur : instancie la fenetre
-	 * @param controller controleur, contrôle les entrées (les cliques) sur les JButton
+	 * @param controller controleur, contrÃ´le les entrÃ©es (les cliques) sur les JButton
 	 * @param cheat true pour afficher tous les pions en standBy, false pour cacher les pions adverses pendant le standBy
 	 */
 	public Fenetre(AbstractController controller, boolean cheat){
 		this.cheat = cheat;
 		
+		//initialisation de la fenetre
 		setTitle("Ghost !");
 		setSize(WIDTH, HEIGHT);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		
+		//initialisation du controleur interne et du plateau de jeu
 		this.controller = controller; 
 		gameBoard = new GameBoard();
-		gameBoard.setExits();
+		//gameBoard.setExits();
 		gameBoard.addListeners(new SquareListener());
 		
+		//initialisation des polices d'affichage + panneau d'affichage du haut + initialisation du bouton ok
 		Font font = new Font("Comic sans MS", Font.BOLD, 20);
 		upperText = new JLabel();
 		upperText.setFont(font);
@@ -120,15 +130,16 @@ public class Fenetre extends JFrame implements Observer{
 		upperText.setHorizontalAlignment(SwingConstants.CENTER);
 		validate = new JButton("OK");
 		validate.addActionListener(new validateButtonListener());
-		
 		upperPane = new JPanel();
 		upperPane.add(upperText);
 		upperPane.add(validate);
 		validate.setEnabled(false);
 		
+		//initialisation du panneau du bas
 		downLabel = new JLabel();
 		downLabel.setFont(font);
 		
+		//crÃ©er un BorderLayout
 		setLayout(new BorderLayout());
 		getContentPane().add(upperPane, BorderLayout.NORTH);
 		getContentPane().add(gameBoard, BorderLayout.CENTER);
@@ -139,7 +150,7 @@ public class Fenetre extends JFrame implements Observer{
 	}
 	
 	/**
-	 * écouteur pour les cases du plateau
+	 * ecouteur pour les cases du plateau
 	 */
 	class SquareListener implements ActionListener{
 		Square selectedSquare = new Square("");
@@ -148,11 +159,12 @@ public class Fenetre extends JFrame implements Observer{
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			//on recupere les coordonnees de la case cliquee
 			selectedSquare =  (Square)e.getSource();
 			currentLine = selectedSquare.getLine();
 			currentColumn = selectedSquare.getColumn();
 			
-			//phase de placements initiaaux
+			//phase de placements initiaux
 			if(initPhase){
 				controller.setSquareAt(currentLine, currentColumn);
 				
@@ -163,23 +175,65 @@ public class Fenetre extends JFrame implements Observer{
 					controller.setSquareAt(currentLine, currentColumn);
 					aSquareIsSelected = true;
 					currentSelectedSquare = gameBoard.getSquareAt(currentLine, currentColumn);
-					currentSelectedSquare.setBackground(Color.green);
+					highLightCurrentSquare(true);
+					highLightPossibleMoves(true);
 				}
-				//déplacement du pion si mouvement valide
+				//deplacement du pion si mouvement valide
 				else{
 					controller.setDestSquateAt(currentLine, currentColumn);
 					aSquareIsSelected = false;
-					currentSelectedSquare.setBackground(Color.white);
+					highLightCurrentSquare(false);
+					highLightPossibleMoves(false);
 					currentSelectedSquare = new Square("");
 				}
+			}
+		}
+		
+		/**
+		 * affiche le pion actuellement selectionnÃ©
+		 * @param on active/desactive l'affichage
+		 */
+		private void highLightCurrentSquare(boolean on){
+			if(on)
+				currentSelectedSquare.setBackground(Color.cyan);
+			else
+				currentSelectedSquare.setBackground(Color.white);
+		}
+		
+		/**
+		 * affiche les coups possibles pour le pion selectionnÃ©
+		 * @param on true pour rÃ©vÃ©ler (affcher) les coups possibles, false pour ne pas rÃ©vÃ©ler
+		 */
+		private void highLightPossibleMoves(boolean on){
+			if(on){
+				for (Direction dir : Direction.values()){
+					int temp_line = currentLine + dir.getLine();
+					int temp_col = currentColumn + dir.getColumn();
+					
+					if(
+							temp_line >= 0 &&
+							temp_line < Parameters.BOARD_HEIGHT &&
+							temp_col >= 0 &&
+							temp_col < Parameters.BOARD_WIDTH &&
+							!controller.thereIsPawnAt(temp_line, temp_col)
+					){
+						
+						gameBoard.getSquareAt(temp_line, temp_col).setBackground(Color.GREEN);
+						possibleMovesSquares.add(gameBoard.getSquareAt(temp_line, temp_col));
+					}
+				}
+			}
+			else{
+				for (Square square : possibleMovesSquares)
+					square.setBackground(Color.white);
+				
+				possibleMovesSquares = new ArrayList<Square>();
 			}
 		}
 	}
 	
 	/**
-	 * écouteur pour le bouton "OK"
-	 * @author Li Huanghuang Liang Edgar
-	 *
+	 * Ã©couteur pour le bouton "OK". le clique sur celui-ci le sort du standBy
 	 */
 	class validateButtonListener implements ActionListener{
 
@@ -195,9 +249,12 @@ public class Fenetre extends JFrame implements Observer{
 
 	@Override
 	public void update(Player white, Player black, boolean whiteToPlay, boolean initPhase) {
+		//on rafraichit l'ecran
 		gameBoard.clear();
+		
 		if(justSwitchedTurn(whiteToPlay)) onStandBy = true;
 		
+		//controle des conditions de fin de partie
 		if(!initPhase) {
 			updateDownLabel(white, black, whiteToPlay);
 			
@@ -210,6 +267,7 @@ public class Fenetre extends JFrame implements Observer{
 					upperText.setText("Desole " + (whiteToPlay? white.getName():black.getName()) + " ...");
 					downLabel.setText("Vous avez perdu ! :(");
 				}
+				//affiche l'Ã©tat du jeu Ã  la fin de la partie
 				gameBoard.setEnabled(false);
 				updatePlayer(white, true);
 				updatePlayer(black, true);
@@ -219,19 +277,27 @@ public class Fenetre extends JFrame implements Observer{
 		}
 		
 		if(onStandBy) {
+			//mettre en attente et cacher la nature des fantomes
 			putOnStandBy();
 			updatePlayer(white, cheat);
 			updatePlayer(black, cheat);
 			this.whiteToPlay = whiteToPlay;
 		}else{
+			//afficher le plateau de jeu pour le joueur courant
 			updateUpperLabel(whiteToPlay, initPhase);
 			updatePlayer(white, whiteToPlay || cheat);
 			updatePlayer(black, !whiteToPlay || cheat);
+			updateExits(whiteToPlay);
 		}
 		
 		if(this.initPhase != initPhase) this.initPhase = initPhase;
 	}
 	
+	/**
+	 * afficher l'ensemble des pions pour un joueur
+	 * @param player le joueur pour qui on doit afficher les pions
+	 * @param reveal true pour rÃ©vÃ©ler la nature des fantomes, false sinon
+	 */
 	private void updatePlayer(Player player, boolean reveal){
 		String sideName = player.getName();
 		
@@ -255,7 +321,7 @@ public class Fenetre extends JFrame implements Observer{
 	}
 	
 	/**
-	 * change le texte du bas (qui affiche les décomptes des pions adverses pris)
+	 * change le texte du bas (qui affiche les dÃ©comptes des pions adverses pris)
 	 * @param white joueur blanc
 	 * @param black joueur noir
 	 * @param whiteToPlay si c'est au joueur blanc de jouer
@@ -265,17 +331,28 @@ public class Fenetre extends JFrame implements Observer{
 			", mechant " + (Parameters.NB_BAD - (whiteToPlay? black:white).getBadRemaning()));
 	}
 	
+	private void updateExits(boolean whiteToPlay){
+		Color exitsColor = Color.yellow;
+		if(whiteToPlay){
+			gameBoard.getSquareAt(0, 0).setBackground(exitsColor);
+			gameBoard.getSquareAt(0, Parameters.BOARD_WIDTH-1).setBackground(exitsColor);
+		}else{
+			gameBoard.getSquareAt(Parameters.BOARD_HEIGHT - 1, 0).setBackground(exitsColor);
+			gameBoard.getSquareAt(Parameters.BOARD_HEIGHT-1, Parameters.BOARD_WIDTH-1).setBackground(exitsColor);
+		}
+	}
+	
 	/**
-	 * Dire si on vient de passer à l'autre joueur (et mettre ainsi en pause)
-	 * @param whiteToPlay la variable à comparer avec whiteToPlay courant
-	 * @return vrai si on a changé de tour
+	 * Dire si on vient de passer a l'autre joueur (et mettre ainsi en pause)
+	 * @param whiteToPlay la variable Ã  comparer avec whiteToPlay courant
+	 * @return vrai si on a changÃ© de tour
 	 */
 	private boolean justSwitchedTurn(boolean whiteToPlay){
 		return this.whiteToPlay != whiteToPlay;
 	}
 	
 	/**
-	 * met en pause le jeu (pour laisser le temps à un joueur de se retourner et à l'autre joueur de s'installer)
+	 * met en pause le jeu (pour laisser le temps Ã  un joueur de se retourner et Ã  l'autre joueur de s'installer)
 	 */
 	private void putOnStandBy(){
 		gameBoard.setEnabled(false);

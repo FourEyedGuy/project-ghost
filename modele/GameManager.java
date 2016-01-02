@@ -1,7 +1,7 @@
 package modele;
 
 /**
- * La classe qui est chargée du gérer l'état du jeu
+ * La classe qui est chargÃ©e du gÃ©rer l'Ã©tat du jeu
  * @author Edgar Liang, Li Huanghuang
  *
  */
@@ -17,7 +17,7 @@ public class GameManager extends AbstractModel{
 	}
 	
 	/**
-	 * Constructeur avec les noms par défauts ("Blanc" pour white et "Noir" pour black)
+	 * Constructeur avec les noms par dÃ©fauts ("Blanc" pour white et "Noir" pour black)
 	 */
 	public GameManager(){
 		super();
@@ -40,7 +40,7 @@ public class GameManager extends AbstractModel{
 	}
 	
 	/**
-	 * Renvoie le String décrivant l'état du GameManager
+	 * Renvoie le String dÃ©crivant l'Ã©tat du GameManager
 	 */
 	public String toString(){
 		return white.toString() + black.toString() +

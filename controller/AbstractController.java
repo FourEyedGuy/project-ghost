@@ -3,19 +3,19 @@ package controller;
 import modele.AbstractModel;
 
 /**
- * Classe abstraite contrôleur : contrôle les cliques de souris (en particulier pour contrôler le bon positionnement des pions lors de la phase initiale, 
- * ainsi du bon déplacement des pions lors de la phase de jeu)
+ * Classe abstraite contrÃ´leur : contrÃ´le les cliques de souris (en particulier pour contrÃ´ler le bon positionnement des pions lors de la phase initiale, 
+ * ainsi du bon dÃ©placement des pions lors de la phase de jeu)
  * @author Edgar Liang, Huanghuang Li
  *
  */
 public abstract class AbstractController {
 	/**
-	 * Modèle à mettre à jour selon les actions du joueur
+	 * ModÃ¨le Ã  mettre Ã  jour selon les actions du joueur
 	 */
 	protected AbstractModel gameMngr;
 	
 	/**
-	 * vrai si on est à la phase de placements initiaux
+	 * vrai si on est Ã  la phase de placements initiaux
 	 */
 	protected boolean isInitPhase;
 	
@@ -25,28 +25,28 @@ public abstract class AbstractController {
 	protected boolean whiteToPlay;
 
 	/**
-	 * la ligne sur laquelle est située la case à contrôler
+	 * la ligne sur laquelle est situÃ©e la case Ã  contrÃ´ler
 	 */
 	protected int pawnLine = -1;
 	
 	/**
-	 * la colonne sur laquelle est située la case à contrôler
+	 * la colonne sur laquelle est situÃ©e la case Ã  contrÃ´ler
 	 */
 	protected int pawnColumn = -1;
 	
 	/**
-	 * la ligne sur laquelle est située la case de destination à contrôler
+	 * la ligne sur laquelle est situÃ©e la case de destination Ã  contrÃ´ler
 	 */
 	protected int destLine = -1;
 	
 	/**
-	 * la colonne sur laquelle est située la case de destination à contrôler
+	 * la colonne sur laquelle est situÃ©e la case de destination Ã  contrÃ´ler
 	 */
 	protected int destColumn = -1;
 	
 	/**
 	 * constructeur 
-	 * @param gameMngr modèle sur lequel faire les contrôles et faire les mises à jour
+	 * @param gameMngr modÃ¨le sur lequel faire les contrÃ´les et faire les mises Ã  jour
 	 */
 	public AbstractController(AbstractModel gameMngr){
 		this.gameMngr = gameMngr;
@@ -55,25 +55,25 @@ public abstract class AbstractController {
 	}
 	
 	/**
-	 * met la valeur de la ligne de la case sélectionnée
-	 * @param line la valeur à mettre
+	 * change la valeur de la ligne de la case selectionnÃ©e
+	 * @param line la nouvelle valeur de ligne Ã  mettre
 	 */
-	public void setLine(int line) {
+	protected void setLine(int line) {
 		this.pawnLine = line;
 	}
 
 	/**
-	 * met la valeur de la colonne de la case sélectionnée
-	 * @param column la valeur à mettre
+	 * change la valeur de la colonne de la case selectionnÃ©e
+	 * @param column la nouvelle valeur de colonne Ã  mettre
 	 */
-	public void setColumn(int column) {
+	protected void setColumn(int column) {
 		this.pawnColumn = column;
 	}
 	
 	/**
-	 * instancie et contrôle les coordonnées concernant la case sélectionnée
-	 * @param line la ligne sur laquelle est situé la case sélectionnée
-	 * @param column la colonne sur laquelle est situé la case sélectionnée
+	 * instancie dans controller et contrÃ´le les coordonnÃ©es concernant la case selectionnÃ©e
+	 * @param line la ligne sur laquelle est situÃ©e la case selectionnÃ©e
+	 * @param column la colonne sur laquelle est situÃ©e la case selectionnÃ©e
 	 */
 	public void setSquareAt(int line, int column){
 		setLine(line);
@@ -82,25 +82,25 @@ public abstract class AbstractController {
 	}
 	
 	/**
-	 * met la valeur de la ligne de la case de destination
-	 * @param destLine la valeur à  mettre
+	 * change la valeur de la ligne de la case de destination
+	 * @param destLine la valeur a mettre
 	 */
-	public void setDestLine(int destLine) {
+	protected void setDestLine(int destLine) {
 		this.destLine = destLine;
 	}
 
 	/**
 	 * met la valeur de la colonne de la case de destination
-	 * @param destColumn la valeur Ã  mettre
+	 * @param destColumn la valeur a mettre
 	 */
-	public void setDestColumn(int destColumn) {
+	protected void setDestColumn(int destColumn) {
 		this.destColumn = destColumn;
 	}
 	
 	/**
-	 * instancie et contrôle les coordonnées concernant la case de destination
-	 * @param destLine la ligne sur laquelle est situé la case de destination
-	 * @param destColumn la colonne sur laquelle est situé la case de destination
+	 * instancie et contrÃ´le les coordonnÃ©es concernant la case de destination
+	 * @param destLine la ligne sur laquelle est situÃ©e la case de destination
+	 * @param destColumn la colonne sur laquelle est situÃ©e la case de destination
 	 */
 	public void setDestSquateAt(int destLine, int destColumn){
 		setDestLine(destLine);
@@ -126,8 +126,8 @@ public abstract class AbstractController {
 	}
 	
 	/**
-	 * Dire si le joueur courant a gagné
-	 * @return vrai si le joueur dont c'est le tour  a gagné
+	 * Dire si le joueur courant a gagnÃ©
+	 * @return vrai si le joueur dont c'est le tour a gagnÃ©
 	 */
 	public boolean currentPlayerWin(){
 		if(gameMngr.isWhiteToPlay()){
@@ -142,17 +142,17 @@ public abstract class AbstractController {
 	}
 	
 	/**
-	 * controle si la case selectionnée est conforme aux règles du jeu et met à jour le modèle en conséquence
+	 * contrÃ´le si la manipulation du joueur est conforme aux rÃ¨gles du jeu et met Ã  jour le modÃ¨le en consÃ©quence
 	 */
 	public abstract void control();
 	
 	/**
-	 * controle les placements initiaux des pions sur le plateau
+	 * contrÃ´le les placements initiaux des pions sur le plateau
 	 */
 	public abstract void initControl();
 	
 	/**
-	 * controle le dÃ©placement des pions
+	 * contrÃ´le le dÃ©placement des pions
 	 */
 	public abstract void playControl();
 	

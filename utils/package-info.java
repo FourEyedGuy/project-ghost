@@ -1,4 +1,4 @@
 /**
- * contient des constantes de jeux et un objet enum de directions de déplacements
+ * contient des constantes de jeux et un objet enum de directions de dÃ©placements
  */
 package utils;

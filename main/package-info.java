@@ -1,4 +1,4 @@
 /**
- * contient la class main, qui lance l'exécution du jeu
+ * contient la class main, qui lance l'exÃ©cution du jeu
  */
 package main;

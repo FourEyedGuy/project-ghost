@@ -15,12 +15,12 @@ public abstract class Parameters {
 	public static final int BOARD_HEIGHT = 6;
 	
 	/**
-	 * le nombre de départ de pions fantôme méchant
+	 * le nombre de dÃ©part de pions fantÃ´me mÃ©chant
 	 */
 	public static final int NB_BAD = 4;
 	
 	/**
-	 * le nombre de départ de pions fantôme gentil
+	 * le nombre de dÃ©part de pions fantÃ´me gentil
 	 */
 	public static final int NB_GOOD = 4;
 }

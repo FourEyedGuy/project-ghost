@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import utils.Parameters;
 
 /**
- * la classe construisant le plateau du jeu dans la fenêtre
+ * la classe construisant le plateau du jeu dans la fenÃªtre
  * @author Edgar Liang
  */
 @SuppressWarnings("serial")
@@ -34,10 +34,10 @@ public class GameBoard extends JPanel{
 	}
 	
 	/**
-	 * change le texte de la case indiquée
+	 * change le texte de la case indiquÃ©e
 	 * @param text texte Ã  mettre
-	 * @param line ligne sur laquelle est située la case indiquée
-	 * @param column colonne sur laquelle est situÃ© la case indiquée
+	 * @param line ligne sur laquelle est situÃ©e la case indiquÃ©e
+	 * @param column colonne sur laquelle est situÃ© la case indiquÃ©e
 	 */
 	public void setSquareAt(String text, int line, int column){
 		int index = line * Parameters.BOARD_WIDTH + column;
@@ -46,19 +46,19 @@ public class GameBoard extends JPanel{
 	}
 	
 	/**
-	 * Renvoie la case aux coordonnées indiquées
-	 * @param line la ligne sur laquelle est située la case
-	 * @param column la colonne sur laquelle est située la case
-	 * @return la case aux coordonnées (ligne, colonne)
+	 * Renvoie la case aux coordonnÃ©es indiquÃ©es
+	 * @param line la ligne sur laquelle est situÃ©e la case
+	 * @param column la colonne sur laquelle est situÃ©e la case
+	 * @return la case aux coordonnÃ©es (ligne, colonne)
 	 */
 	public Square getSquareAt(int line, int column){
 		return squares[line * Parameters.BOARD_WIDTH + column];
 	}
 	
 	/**
-	 * Renvoyer la case à l'index demandée
-	 * @param index l'index de la case demandée
-	 * @return la case à l'index index
+	 * Renvoyer la case Ã  l'index demandÃ©e
+	 * @param index l'index de la case demandÃ©e
+	 * @return la case Ã  l'index index
 	 */
 	public Square getSquareAt(int index){
 		return squares[index];
@@ -68,7 +68,7 @@ public class GameBoard extends JPanel{
 	 * colorie les cases de sortie
 	 */
 	public void setExits(){
-		Color exitSquareColor = Color.gray;
+		Color exitSquareColor = Color.yellow;
 		
 		getSquareAt(0, 0).setBackground(exitSquareColor);
 		getSquareAt(0, Parameters.BOARD_WIDTH-1).setBackground(exitSquareColor);
@@ -77,8 +77,8 @@ public class GameBoard extends JPanel{
 	}
 	
 	/**
-	 * active ou désactive l'ensemble des boutons (cases) du plateau de jeu
-	 * @param on true pour activer, false pour désactiver
+	 * active ou desactive l'ensemble des boutons (cases) du plateau de jeu
+	 * @param on true pour activer, false pour dÃ©sactiver
 	 */
 	public void setEnabled(boolean on){
 		for (Square square : squares)
@@ -89,15 +89,15 @@ public class GameBoard extends JPanel{
 	 * efface le contenue de tous les cases
 	 */
 	public void clear(){
-		for (Square square : squares)
+		for (Square square : squares){
 			square.setText("");
-		
-		setExits();
+			square.setBackground(Color.white);
+		}
 	}
 	
 	/**
-	 * Ajoute un écouteur à  chacun des cases du plateau
-	 * @param actionListener écouteur à ajouter
+	 * Ajoute un Ã©couteur Ã  chacun des cases du plateau
+	 * @param actionListener Ã©couteur Ã  ajouter
 	 */
 	public void addListeners(ActionListener actionListener){
 		for (Square square:squares){
@@ -106,8 +106,8 @@ public class GameBoard extends JPanel{
 	}
 	
 	/**
-	 * enlève un écouteur à l'ensemble des cases du plateau
-	 * @param actionListener écouteur à enlever
+	 * enlÃ¨ve un Ã©couteur de l'ensemble des cases du plateau
+	 * @param actionListener Ã©couteur Ã  enlever
 	 */
 	public void removeListeners(ActionListener actionListener){
 		for (Square square:squares){

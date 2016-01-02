@@ -6,19 +6,19 @@ import observer.Observable;
 import observer.Observer;
 
 /**
- * Classe abstraite modËle : le modËle est chargÈ de gÈrer l'Ètat du jeu 
+ * Classe abstraite mod√®le : le mod√®le est charg√© de g√©rer l'√©tat du jeu 
  * @author Edgar Liang, HuangHuang Li
  *
  */
 public abstract class AbstractModel implements Observable {
 	
 	/**
-	 * le joueur blanc (celui qui place ses pions en bas ‡ la phase initiale)
+	 * le joueur blanc (celui qui place ses pions en bas √† la phase initiale)
 	 */
 	protected Player white;
 	
 	/**
-	 * le joueur noir (celui qui place ses pions en haut ‡ la phase initiale)
+	 * le joueur noir (celui qui place ses pions en haut √† la phase initiale)
 	 */
 	protected Player black;
 	
@@ -28,12 +28,12 @@ public abstract class AbstractModel implements Observable {
 	private ArrayList<Observer> observersList = new ArrayList<Observer>();
 	
 	/**
-	 * true si c'est au joueur blanc de jouer (premier joueur par dÈfaut)
+	 * true si c'est au joueur blanc de jouer (premier joueur par d√©faut)
 	 */
 	protected boolean whiteToPlay = true;
 	
 	/**
-	 * true si on est ‡ la phase d'initialisation (placement initial des pions)
+	 * true si on est √† la phase d'initialisation (placement initial des pions)
 	 */
 	protected boolean initPhase = true;
 	
@@ -115,15 +115,15 @@ public abstract class AbstractModel implements Observable {
 	}
 
 	/**
-	 * mettre l'attribut initPhase ‡ la valeur demandÈe
-	 * @param initPhase valeur boolÈenne ‡ mettre
+	 * mettre l'attribut initPhase √† la valeur demand√©e
+	 * @param initPhase valeur bool√©enne √† mettre
 	 */
 	public void setInitPhase(boolean initPhase) {
 		this.initPhase = initPhase;
 		notifyObserver();
 	}
 	/**
-	 * dÈplacer le pion (pawn) aux coordonÈes indiquÈes vers les coordonnÈes de destination
+	 * d√©placer le pion (pawn) aux coordon√©es indiqu√©es vers les coordonn√©es de destination
 	 * @param pawnLine ligne sur laquelle est le pion
 	 * @param pawnColumn colonne sur laquelle est le pion
 	 * @param destLine ligne de la case destination
@@ -132,63 +132,73 @@ public abstract class AbstractModel implements Observable {
 	public abstract void movePawnAt(int pawnLine, int pawnColumn, int destLine, int destColumn);
 	
 	/**
-	 * Ajoute un pion fantÙme gentil pour le joueur dont c'est le tour de jouer
-	 * @param line la ligne sur laquelle doit Ítre ajoutÈ le pion gentil
-	 * @param column la colonne sur laquelle doit Ítre ajoutÈ le pion gentil
+	 * Ajoute un pion fant√¥me gentil pour le joueur dont c'est le tour de jouer
+	 * @param line la ligne sur laquelle doit √™tre ajout√© le pion gentil
+	 * @param column la colonne sur laquelle doit √™tre ajout√© le pion gentil
 	 */
 	public abstract void addCurrentPlayerGoodPwnAt(int line, int column);
 	
 	/**
-	 * Ajoute un pion fantÙme mÈchant spour le joueur dont c'est le tour
-	 * @param line la ligne sur laquelle doit Ítre ajoutÈ le pion mÈchant
-	 * @param column la colonne sur laquelle doit Ítre ajoutÈ le pion mÈchant
+	 * Ajoute un pion fant√¥me m√©chant spour le joueur dont c'est le tour
+	 * @param line la ligne sur laquelle doit √™tre ajout√© le pion m√©chant
+	 * @param column la colonne sur laquelle doit √™tre ajout√© le pion m√©chant
 	 */
 	public abstract void addCurrentPlayerBadPwnAt(int line, int column);
+	
+	/**
+	 * Dire si tous les pions fant√¥mes gentils ont √©t√© plac√©s sur plateau par le joueur courant
+	 * @return true si tous les pions gentils sont plac√©s sur le plateau
+	 */
 	public abstract boolean allCurrentPlayerGoodPwnSet();
+	
+	/**
+	 * Dire si tous les pions fant√¥mes m√©chants ont √©t√© plac√©s sur le plateau par le joueur courant
+	 * @return true si tous les pions m√©chants sont plac√©s sur le plateau
+	 */
 	public abstract boolean allCurrentPlayerBadPwnSet();
 	
 	/**
-	 * Dire s'il y a un pion ‡† la case indiquÈe
-	 * @param line la ligne de la case ‡† analyser
-	 * @param column la colonne de la case ‡† analyser
+	 * Dire s'il y a un pion √† la case indiqu√©e
+	 * @param line la ligne de la case √† analyser
+	 * @param column la colonne de la case √† analyser
 	 * @return vrai s'il y a un pion (adverse ou pas)
 	 */
 	public abstract boolean thereIsPawnAt(int line, int column);
 	
 	/**
-	 * Dire s'il y a un pion de l'adversaire ‡† la case indiquÈe
-	 * @param line la ligne de la case ‡†analyser
-	 * @param column la colonne de la case ‡ analyser
+	 * Dire s'il y a un pion de l'adversaire √† la case indiqu√©e
+	 * @param line la ligne de la case √† analyser
+	 * @param column la colonne de la case √† analyser
 	 * @return vrai s'il y a un pion adverse
 	 */
 	public abstract boolean thereIsOpponentPawnAt(int line, int column);
 	
 	/**
-	 * enlËve de la case indiquÈe le pion adverse
-	 * @param line la ligne sur laquelle est situÈe le pion adverse
-	 * @param column la colonne sur laquelle est situÈe le pion adverse
+	 * enl√®ve de la case indiqu√©e le pion adverse
+	 * @param line la ligne sur laquelle est situ√©e le pion adverse
+	 * @param column la colonne sur laquelle est situ√©e le pion adverse
 	 */
 	public abstract void removeOpponentPawnAt(int line, int column);
 	
 	/**
-	 * Dire si le joueur blanc a gagnÈ
-	 * @return true si Blanc a gagnÈ
+	 * Dire si le joueur blanc a gagn√©
+	 * @return true si Blanc a gagn√©
 	 */
 	public abstract boolean whitePlayerWon();
 	
 	/**
-	 * Dire si le joueur noir a gagnÈ
-	 * @return true si Noir a gagnÈ
+	 * Dire si le joueur noir a gagn√©
+	 * @return true si Noir a gagn√©
 	 */
 	public abstract boolean blackPlayerWon();
 
 	/**
-	 * Dire si le jeu est fini, si l'une des conditions de fin de jeu est rÈalisÈe :
-	 * - Un joueur a capturÈ tout les bon fantÙmes de son adversaire
-	 * - Un joueur a capturÈ tout les mauvais fantÙme de son adversaire
-	 * - Un joueur a rÈussi ‡ faire sortir tout ses bon fantÙmes
+	 * Dire si le jeu est fini, si l'une des conditions de fin de jeu est r√©alis√©e :
+	 * - Un joueur a captur√© tout les bon fant√¥mes de son adversaire
+	 * - Un joueur a captur√© tout les mauvais fant√¥me de son adversaire
+	 * - Un joueur a r√©ussi √† faire sortir tout ses bon fant√¥mes
 	 * 
-	 * @return true si le jeu est terminÈ
+	 * @return true si le jeu est termin√©
 	 */
 	public boolean gameEnded(){
 		return whitePlayerWon() || blackPlayerWon();

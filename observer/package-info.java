@@ -1,4 +1,4 @@
 /**
- * les interfaces utilisés pour l'implémentation du pattern observateurs/observés
+ * les interfaces utilisÃ©s pour l'implÃ©mentation du pattern observateurs/observÃ©s
  */
 package observer;

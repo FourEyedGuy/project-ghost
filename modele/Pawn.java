@@ -3,7 +3,7 @@ package modele;
 import utils.Parameters;
 
 /**
- * Pion : il peut être soit gentil (Good), soit méchant (Bad)
+ * Pion : il peut Ãªtre soit gentil (Good), soit mÃ©chant (Bad)
  * 
  * @author Edgar Liang, Li Huanghuang
  */
@@ -12,7 +12,7 @@ public abstract class Pawn{
 	private int column;
 	
 	/**
-	 * Créer un pion et le placer aux coordonnées demandées
+	 * CrÃ©er un pion et le placer aux coordonnÃ©es demandÃ©es
 	 * @param line la ligne sur laquelle placer le pion
 	 * @param column la colonne sur laquelle placer le pion
 	 */
@@ -22,7 +22,7 @@ public abstract class Pawn{
 	}
 	
 	/**
-	 * convertit les coordonnées du pion courant (this) en String
+	 * convertit les coordonnÃ©es du pion courant (this) en String
 	 * @return les coordonnees du pion en String
 	 */
 	public String getPosition() {
@@ -30,19 +30,19 @@ public abstract class Pawn{
 	}
 	
 	/**
-	 * convertit les coordonnées données en paramètre en String
-	 * @param line ligne de la coordonnée à convertir
-	 * @param column colonne de la coordonées à convertir
-	 * @return coordonnées en String
+	 * convertit les coordonnÃ©es donnÃ©es en paramÃ¨tre en String
+	 * @param line ligne de la coordonnÃ©e Ã  convertir
+	 * @param column colonne de la coordonÃ©es Ã  convertir
+	 * @return coordonnÃ©es en String
 	 */
 	public static String getPosition(int line, int column){
 		return Integer.toString(Parameters.BOARD_HEIGHT-line) + Character.toString((char) ('a'+ column));
 	}
 	
 	/**
-	 * Positionne le pion aux coordonnées demandées
-	 * @param line la ligne sur laquelle est situé la case cible
-	 * @param column la colonne sur laquelle est situé la case cible
+	 * Positionne le pion aux coordonnÃ©es demandÃ©es
+	 * @param line la ligne sur laquelle est situÃ© la case cible
+	 * @param column la colonne sur laquelle est situÃ© la case cible
 	 */
 	public void setPosition(int line, int column) {
 		this.line = line;
@@ -50,8 +50,8 @@ public abstract class Pawn{
 	}
 	
 	/**
-	 * Positionne le pion aux coordonnées indiquées
-	 * @param coord les coordonnées cibles au format String
+	 * Positionne le pion aux coordonnÃ©es indiquÃ©es
+	 * @param coord les coordonnÃ©es cibles au format String
 	 */
 	public void setPosition (String coord){
 		 this.line = Pawn.getLine(coord); 
@@ -59,16 +59,16 @@ public abstract class Pawn{
 	}
 	
 	/**
-	 * renvoie la ligne sur laquelle est située le pion
+	 * renvoie la ligne sur laquelle est situÃ©e le pion
 	 */
 	public int getLine() {
 		return line;
 	}
 	
 	/**
-	 * A partir de coordonnées en String, renvoyer la ligne correspondante
-	 * @param coord coordonées en String
-	 * @return la ligne correspondant aux coordonnées en String
+	 * A partir de coordonnÃ©es en String, renvoyer la ligne correspondante
+	 * @param coord coordonÃ©es en String
+	 * @return la ligne correspondant aux coordonnÃ©es en String
 	 */
 	public static int getLine(String coord){
 		return Parameters.BOARD_HEIGHT - Integer.parseInt(coord,0);
@@ -82,27 +82,27 @@ public abstract class Pawn{
 	}
 	
 	/**
-	 * A partir de coordonnées en String, renvoyer la colonne correspondante
-	 * @param coord coordonnées en String
-	 * @return la colonne correspondant aux coordonées en String
+	 * A partir de coordonnÃ©es en String, renvoyer la colonne correspondante
+	 * @param coord coordonnÃ©es en String
+	 * @return la colonne correspondant aux coordonÃ©es en String
 	 */
 	public static int getColumn(String coord){
 		return Character.getNumericValue(coord.charAt(1)) - 10;
 	}
 
 	/**
-	 * déplacer le pion à la position indiquée (en String)
-	 * @param square la case vers lequel déplacer le pion
+	 * dÃ©placer le pion Ã  la position indiquÃ©e (en String)
+	 * @param square la case vers lequel dÃ©placer le pion
 	 */
 	public void move(String square){
 		setPosition(square);
 	}
 	
 	/**
-	 * déplace le pion à la position indiquée
+	 * dÃ©place le pion Ã  la position indiquÃ©e
 	 * 
-	 * @param line la ligne vers laquelle déplacer le pion
-	 * @paraml column la colonne vers laquelle déplacer le pion
+	 * @param line la ligne vers laquelle dÃ©placer le pion
+	 * @paraml column la colonne vers laquelle dÃ©placer le pion
 	 */
 	public void move(int line, int column){
 		setPosition(line, column);

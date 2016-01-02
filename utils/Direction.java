@@ -21,14 +21,14 @@ public enum Direction {
 	}
 
 	/**
-	 * le facteur de déplacement horizontal de la direction
+	 * le facteur de dÃ©placement horizontal de la direction
 	 */
 	public int getLine() {
 		return line;
 	}
 
 	/**
-	 * le facteur de déplacement vertical de la direction
+	 * le facteur de dÃ©placement vertical de la direction
 	 */
 	public int getColumn() {
 		return column;

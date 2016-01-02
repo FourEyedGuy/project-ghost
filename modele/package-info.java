@@ -1,4 +1,4 @@
 /**
- * le modèle du pattern MVC : gère les données des deux joueurs et de leurs pions
+ * le modÃ¨le du pattern MVC : gÃ©re les donnÃ©es des deux joueurs et de leurs pions
  */
 package modele;

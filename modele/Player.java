@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import utils.*;
 
 /**
- * La classe joueur, l'objet joueur a un nom, et deux listes de pions : pions gentils et pions méchants
+ * La classe joueur, l'objet joueur a un nom, et deux listes de pions : pions gentils et pions mÃ©chants
  * @author Edgar
  *
  */
@@ -32,7 +32,7 @@ public class Player {
 	}
 	
 	/**
-	 * Renvoie la liste de tous les pions (gentils et méchants indistinctement) du joueurs
+	 * Renvoie la liste de tous les pions (gentils et mÃ©chants indistinctement) du joueurs
 	 * @return la liste de tous les pions du joueur
 	 */
 	public ArrayList<Pawn> getAllPawns(){
@@ -44,15 +44,15 @@ public class Player {
 	}
 	
 	/**
-	 * Dire combien de pions fantôme gentils il reste au joueur
-	 * @return le nombre de pions fantômes gentils restant
+	 * Dire combien de pions fantÃ´me gentils il reste au joueur
+	 * @return le nombre de pions fantÃ´mes gentils restant
 	 */
 	public int getGoodRemaning(){
 		return goodPawns.size();	
 	}
 
 	/**
-	 * Dire combien de pions fantômes méchants ils restent au joueur
+	 * Dire combien de pions fantÃ´mes mÃ©chants ils restent au joueur
 	 * @return le nombre de 
 	 */
 	public int getBadRemaning(){
@@ -60,7 +60,7 @@ public class Player {
 	}
 
 	/**
-	 * instancie les pions fantômes gentils du joueur
+	 * instancie les pions fantÃ´mes gentils du joueur
 	 * @param goodPawns  la liste de l'ensemble des Good
 	 */
 	public void setGoodPawns(ArrayList<Good> goodPawns) {
@@ -68,7 +68,7 @@ public class Player {
 	}
 	
 	/**
-	 * instancie les pions fantômes méchants du joueur
+	 * instancie les pions fantÃ´mes mÃ©chants du joueur
 	 * @param badPawns la liste de l'ensemble des Bad
 	 */
 	public void setBadPawns(ArrayList<Bad> badPawns) {
@@ -76,11 +76,11 @@ public class Player {
 	}
 	
 	/**
-	 * Ajoute aux coordonnées indiquées un pion fantôme gentils
-	 * @param line la ligne sur laquelle est située la case cible
-	 * @param column la colonne sur laquelle est située la case cible
-	 * @param winUp si le pion gentil doit gagner en sortant par l'une des coins supérieurs
-	 * @return true si un pion a effectivement été ajouté
+	 * Ajoute aux coordonnÃ©es indiquÃ©es un pion fantÃ´me gentils
+	 * @param line la ligne sur laquelle est situÃ©e la case cible
+	 * @param column la colonne sur laquelle est situÃ©e la case cible
+	 * @param winUp si le pion gentil doit gagner en sortant par l'une des coins supÃ©rieurs
+	 * @return true si un pion a effectivement Ã©tÃ© ajoutÃ©
 	 */
 	public boolean addGoodPawnAt(int line, int column, boolean winUp){
 		for (int i = 0; i < goodPawns.size(); i++){
@@ -98,11 +98,11 @@ public class Player {
 	}
 	
 	/**
-	 * Ajoute aux coordonnées indiquées un pion fantôme méchants
-	 * @param line ligne sur laquelle est situé la case cible
-	 * @param column la colonne sur laquelle est situé la case cible
+	 * Ajoute aux coordonnÃ©es indiquÃ©es un pion fantÃ´me mÃ©chants
+	 * @param line ligne sur laquelle est situÃ© la case cible
+	 * @param column la colonne sur laquelle est situÃ© la case cible
 	 * 
-	 * @return true si un pion a effectivement été ajouté
+	 * @return true si un pion a effectivement Ã©tÃ© ajoutÃ©
 	 */
 	public boolean addBadPawnAt(int line, int column){
 		for (int i = 0; i < goodPawns.size(); i++){
@@ -120,22 +120,22 @@ public class Player {
 	}
 	
 	/**
-	 * Déplace un pion qui est placé au coordonée indiquée
-	 * @param dir la direction vers lequel déplacer le pion
-	 * @param destLine la ligne sur laquelle est situé la case de destination
-	 * @param column la colonne sur laquelle est situé la case de destination
+	 * DÃ©place un pion qui est placÃ© au coordonÃ©e indiquÃ©e
+	 * @param dir la direction vers lequel dÃ©placer le pion
+	 * @param destLine la ligne sur laquelle est situÃ© la case de destination
+	 * @param column la colonne sur laquelle est situÃ© la case de destination
 	 * 
-	 * @return true s'il y a eu déplacement de pion
+	 * @return true s'il y a eu dÃ©placement de pion
 	 */
 	public void movePawnAtTo(int pawnLine, int pawnColumn, int destLine, int destColumn){
 		getPawnAt(pawnLine, pawnColumn).move(destLine, destColumn);
 	}
 	
 	/**
-	 * Dire s'il y a un pion aux coordonnées indiquées
-	 * @param line la ligne correspondant à la case demandéee
-	 * @param column la colonne corespondant à la case demandée
-	 * @return true s'il y a un pion sur la case demandée
+	 * Dire s'il y a un pion aux coordonnÃ©es indiquÃ©es
+	 * @param line la ligne correspondant Ã  la case demandÃ©ee
+	 * @param column la colonne corespondant Ã  la case demandÃ©e
+	 * @return true s'il y a un pion sur la case demandÃ©e
 	 */
 	public boolean thereIsPawnAt(int line, int column){
 		for (int i = 0; i < goodPawns.size(); i++){
@@ -152,7 +152,7 @@ public class Player {
 	}
 	
 	/**
-	 * Renvoie le Pion situé aux coordonnees indiquees
+	 * Renvoie le Pion situÃ© aux coordonnees indiquees
 	 * @param line
 	 * @param column
 	 * @return le pion qui est situe aux coordonnees indiquees
@@ -183,27 +183,27 @@ public class Player {
 	}
 	
 	/**
-	 * Dire si tous les pions gentils ont été capturés
-	 * @return true si tous les pions gentils ont été capturés
+	 * Dire si tous les pions gentils ont Ã©tÃ© capturÃ©s
+	 * @return true si tous les pions gentils ont Ã©tÃ© capturÃ©s
 	 */
 	public boolean allGoodBeenCaptured(){
 		return goodPawns.size() <= 0;
 	}
 
 	/**
-	 * Dire si tous les pions méchants ont été capturés
-	 * @return true si tous les pions méchants ont été capturés
+	 * Dire si tous les pions mÃ©chants ont Ã©tÃ© capturÃ©s
+	 * @return true si tous les pions mÃ©chants ont Ã©tÃ© capturÃ©s
 	 */
 	public boolean allBadBeenCaptured(){
 		return badPawns.size()<=0;
 	}
 	
 	/**
-	 * retire un pion situé aux coordonnées indiqués
-	 * @param ligne la ligne sur laquelle est située le pion à retirer
-	 * @param colone la colonne sur lequel est situé le pion à retirer
+	 * retire un pion situÃ© aux coordonnÃ©es indiquÃ©s
+	 * @param ligne la ligne sur laquelle est situÃ©e le pion Ã  retirer
+	 * @param colone la colonne sur lequel est situÃ© le pion Ã  retirer
 	 * 
-	 * @return true si un pion a été retiré;
+	 * @return true si un pion a Ã©tÃ© retirÃ©;
 	 */
 	public boolean removePawnAt(int ligne, int colone){
 		for (int i = 0; i < goodPawns.size(); i++){
@@ -223,23 +223,23 @@ public class Player {
 	}
 	
 	/**
-	 * Dire si tous les pions gentils du joueur ont été placés sur le plateau
-	 * @return true si tous les pions gentils ont été placés
+	 * Dire si tous les pions gentils du joueur ont Ã©tÃ© placÃ©s sur le plateau
+	 * @return true si tous les pions gentils ont Ã©tÃ© placÃ©s
 	 */
 	public boolean allGoodPawnsSet(){
 		return getGoodRemaning() == Parameters.NB_GOOD;
 	}
 	
 	/**
-	 * Dire si tous les pions méchants du joueur ont été placés sur le plateau
-	 * @return true si tous les pions méchants ont été placés
+	 * Dire si tous les pions mÃ©chants du joueur ont Ã©tÃ© placÃ©s sur le plateau
+	 * @return true si tous les pions mÃ©chants ont Ã©tÃ© placÃ©s
 	 */
 	public boolean allBadPawnsSet(){
 		return getBadRemaning() == Parameters.NB_BAD;
 	}
 	
 	/**
-	 * Renvoie le String décrivant l'état du joueur
+	 * Renvoie le String dÃ©crivant l'Ã©tat du joueur
 	 */
 	public String toString(){
 		String goodPawnsStr = "";
@@ -254,7 +254,7 @@ public class Player {
 		return "Nom Joueur : " + this.name + "\n" + 
 				"Pions gentils : \n" + 
 				goodPawnsStr +
-				"Pions méchant : \n" + 
+				"Pions mÃ©chant : \n" + 
 				badPawnsStr;
 	}
 }

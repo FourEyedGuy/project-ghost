@@ -3,7 +3,7 @@ package modele;
 import utils.Parameters;
 
 /**
- * Pion fantôme gentil
+ * Pion fantÃ´me gentil
  * @author Edgar Liang, Li Huanghuang
  *
  */
@@ -11,9 +11,9 @@ public class Good extends Pawn {
 	private boolean winUp;
 	
 	/**
-	 * créer un pion gentil et le placer aux coordonnées demandées
-	 * @param line la ligne sur laquelle est situé la case cible
-	 * @param column la colonne sur laquelle est situé la case cible
+	 * crÃ©er un pion gentil et le placer aux coordonnÃ©es demandÃ©es
+	 * @param line la ligne sur laquelle est situÃ© la case cible
+	 * @param column la colonne sur laquelle est situÃ© la case cible
 	 */
 	public Good(int line, int column, boolean winUp) {
 		super(line, column);
@@ -25,8 +25,8 @@ public class Good extends Pawn {
 		return true;
 	}
 	/**
-	 * Dire si le gentil fantôme a réussi à sortir en atteignant l'une des deux cases de sortie
-	 * @return true si le gentil fantôme à atteindre son objectif
+	 * Dire si le gentil fantÃ´me a rÃ©ussi Ã  sortir en atteignant l'une des deux cases de sortie
+	 * @return true si le gentil fantÃ´me Ã  atteindre son objectif
 	 */
 	public boolean exit(){
 		if(getColumn() == 0|| getColumn() == Parameters.BOARD_WIDTH - 1){

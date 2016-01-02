@@ -5,13 +5,13 @@ import utils.Direction;
 import utils.Parameters;
 
 /**
- * la classe contrÙleur hÈritant de AbstractController
+ * la classe contr√¥leur h√©ritant de AbstractController
  */
 public class Controller extends AbstractController{
 
 	/**
 	 * constructeur 
-	 * @param gameMngr modËle gÈrant l'Ètat du jeu
+	 * @param gameMngr mod√®le g√©rant l'√©tat du jeu
 	 */
 	public Controller(AbstractModel gameMngr) {
 		super(gameMngr);
@@ -19,6 +19,7 @@ public class Controller extends AbstractController{
 
 	@Override
 	public void control() {
+		//effectue les controles selon la phase de jeu actuelle
 		if(gameMngr.isInitPhase()){
 			initControl();
 		}
@@ -29,24 +30,30 @@ public class Controller extends AbstractController{
 	@Override
 	public void initControl() {
 		if(isAValidInitSquare()){
+			//placements des pions pour le joueur courant (blanc commence)
 			if(!gameMngr.allCurrentPlayerGoodPwnSet())
 				gameMngr.addCurrentPlayerGoodPwnAt(pawnLine, pawnColumn);
 			else if(!gameMngr.allCurrentPlayerBadPwnSet())
 				gameMngr.addCurrentPlayerBadPwnAt(pawnLine, pawnColumn);
 			
+			/*  
+			 * changement de tour si le joueur  courant a fini de placer ses pions puis changement de phase
+			 *  si tous les joueurs ont fini de placer leurs pions
+			 */
 			if(gameMngr.allCurrentPlayerGoodPwnSet() && gameMngr.allCurrentPlayerBadPwnSet()){
 				if(!gameMngr.isWhiteToPlay()) gameMngr.setInitPhase(false);
 				gameMngr.switchTurn();
 			}
 		}
 		
+		//r√©instanciation des variables de controle
 		pawnLine = -1;
 		pawnColumn = -1;
 	}
 	
 	/**
-	 * dire si la case sÈlectionnÈe correspond ‡ une case valide du pion
-	 * @return true si la case sÈlectionnÈe correspond ‡ une case valide du pion
+	 * dire si la case s√©lectionn√©e correspond √† une case valide du pion
+	 * @return true si la case s√©lectionn√©e correspond √† une case valide du pion
 	 */
 	private boolean isAValidInitSquare(){
 		if(gameMngr.isWhiteToPlay()){
@@ -81,8 +88,8 @@ public class Controller extends AbstractController{
 	}
 	
 	/**
-	 * dire si le dÈplacement est valide
-	 * @return vrai si le dÈplacement est valide
+	 * dire si le d√©placement est valide
+	 * @return vrai si le d√©placement est valide
 	 */
 	private boolean isAValidMove(){
 			for(Direction dir:Direction.values()){

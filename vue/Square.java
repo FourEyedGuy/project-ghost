@@ -6,7 +6,7 @@ import javax.swing.JButton;
 import utils.Parameters;
 
 /**
- * La classe représentant une case du plateau de jeu
+ * La classe reprÃ©sentant une case du plateau de jeu
  * @author Edgar Liang, Li Huanghuang
  *
  */
@@ -35,21 +35,21 @@ public class Square extends JButton{
 	
 	/**
 	 * change la valeur de la case courante
-	 * @param index valeur à mettre
+	 * @param index valeur Ã  mettre
 	 */
 	public void setIndex(int index) {
 		this.index = index;
 	}
 	
 	/**
-	 * retourne la ligne sur laquelle est situé la case
+	 * retourne la ligne sur laquelle est situÃ© la case
 	 */
 	public int getLine(){
 		return index/Parameters.BOARD_WIDTH;
 	}
 	
 	/**
-	 * retourne la colonne sur laquelle est situé la case
+	 * retourne la colonne sur laquelle est situÃ© la case
 	 */
 	public int getColumn(){
 		return index%Parameters.BOARD_WIDTH;

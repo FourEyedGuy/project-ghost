@@ -1,4 +1,4 @@
 /**
- * le contrôleur du pattern MVC : contrôle les entrée récupéré des écouteurs des boutons et met à jour le modèle en conséquence
+ * le contrÃ´leur du pattern MVC : contrÃ´le les entrÃ©e rÃ©cupÃ©rÃ© des Ã©couteurs des boutons et met Ã  jour le modÃ¨le en consÃ©quence
  */
 package controller;
